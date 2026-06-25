@@ -91,6 +91,74 @@
     });
   }
 
+  /* ---------- Карусель отзывов ---------- */
+  const reviewsTrack = document.getElementById("reviews-track");
+
+  if (reviewsTrack) {
+    const prevBtn = document.querySelector(".reviews-nav--prev");
+    const nextBtn = document.querySelector(".reviews-nav--next");
+    const dotsWrap = document.getElementById("reviews-dots");
+    const behavior = prefersReducedMotion ? "auto" : "smooth";
+
+    function metrics() {
+      const cards = reviewsTrack.children;
+      if (!cards.length) return { step: reviewsTrack.clientWidth || 1, pages: 1 };
+      const cardW = cards[0].getBoundingClientRect().width;
+      const gap = parseFloat(getComputedStyle(reviewsTrack).columnGap) || 0;
+      const per = cardW + gap;
+      const visible = Math.max(1, Math.round((reviewsTrack.clientWidth + gap) / per));
+      return { step: visible * per, pages: Math.max(1, Math.ceil(cards.length / visible)) };
+    }
+    function pageCount() { return metrics().pages; }
+    function currentPage() {
+      return Math.round(reviewsTrack.scrollLeft / metrics().step);
+    }
+    function updateDots() {
+      if (!dotsWrap) return;
+      const cur = currentPage();
+      Array.prototype.forEach.call(dotsWrap.children, function (dot, i) {
+        dot.classList.toggle("is-active", i === cur);
+      });
+    }
+    function buildDots() {
+      if (!dotsWrap) return;
+      const n = pageCount();
+      dotsWrap.innerHTML = "";
+      for (let i = 0; i < n; i++) {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.setAttribute("aria-label", "Показать отзывы, страница " + (i + 1));
+        b.addEventListener("click", function () {
+          reviewsTrack.scrollTo({ left: i * metrics().step, behavior: behavior });
+        });
+        dotsWrap.appendChild(b);
+      }
+      updateDots();
+    }
+
+    if (prevBtn) prevBtn.addEventListener("click", function () {
+      reviewsTrack.scrollBy({ left: -metrics().step, behavior: behavior });
+    });
+    if (nextBtn) nextBtn.addEventListener("click", function () {
+      reviewsTrack.scrollBy({ left: metrics().step, behavior: behavior });
+    });
+
+    let rafPending = false;
+    reviewsTrack.addEventListener("scroll", function () {
+      if (rafPending) return;
+      rafPending = true;
+      window.requestAnimationFrame(function () { updateDots(); rafPending = false; });
+    });
+
+    let resizeTimer;
+    window.addEventListener("resize", function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(buildDots, 200);
+    });
+
+    buildDots();
+  }
+
   /* ---------- Форма заявки (фронт-валидация + экран успеха) ---------- */
   const form = document.getElementById("lead-form");
   const success = document.getElementById("form-success");

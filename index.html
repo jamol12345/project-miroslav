@@ -16,35 +16,62 @@
 </head>
 <body>
 
-  <!-- ============ ШАПКА ============ -->
+  <!-- ============ ЛОГОТИП-БАННЕР ============ -->
+  <div class="brand-banner">
+    <div class="container brand-banner__inner">
+      <span class="brand-banner__rule" aria-hidden="true"></span>
+      <a href="#top" class="brand-banner__logo" aria-label="Центр имени Мирослава — наверх">
+        <img src="assets/img/logo.jpg" alt="Центр ясновидения и целительства имени Мирослава" />
+      </a>
+      <span class="brand-banner__rule" aria-hidden="true"></span>
+    </div>
+  </div>
+
+  <!-- ============ ШАПКА (навбар) ============ -->
   <header class="site-header">
     <div class="container site-header__inner">
       <a href="#top" class="brand" aria-label="Центр имени Мирослава — наверх">
         <img class="brand__logo" src="assets/img/logo-mark.jpg" alt="" aria-hidden="true" />
-        <span class="brand__name">Центр имени Мирослава</span>
       </a>
 
-      <nav class="nav" aria-label="Основная навигация">
-        <ul class="nav__list">
-          <li><a class="nav__link" href="#about">О центре</a></li>
-          <li><a class="nav__link" href="#masters">Мастера</a></li>
-          <li><a class="nav__link" href="#specialists">Видео</a></li>
-          <li><a class="nav__link" href="#services">Услуги</a></li>
-          <li><a class="nav__link" href="#contact">Контакты</a></li>
-        </ul>
-      </nav>
+      <div class="site-header__right">
+        <nav class="nav" aria-label="Основная навигация">
+          <ul class="nav__list">
+            <li><a class="nav__link" href="#about">О центре</a></li>
+            <li><a class="nav__link" href="#specialists">Специалисты</a></li>
+            <li><a class="nav__link" href="#masters">Мастера</a></li>
+            <li><a class="nav__link" href="#reviews">Отзывы</a></li>
+            <li><a class="nav__link" href="#services">Услуги</a></li>
+            <li><a class="nav__link" href="#problems">Направления</a></li>
+            <li><a class="nav__link" href="#contact">Контакты</a></li>
+          </ul>
+        </nav>
 
-      <button class="nav-toggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu">
-        <span></span><span></span><span></span>
-      </button>
+        <!-- Мессенджеры (ссылки добавим позже) -->
+        <div class="messengers messengers--header" aria-label="Мессенджеры для связи">
+          <a class="messenger-icon" href="https://wa.me/79852867618" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">
+            <img src="assets/img/icon-whatsapp.svg" alt="WhatsApp" />
+          </a>
+          <!-- MAX: подставьте href="https://max.ru/u/ХЕШ" (ссылка из приложения MAX, см. README) -->
+          <a class="messenger-icon" aria-label="Написать в MAX">
+            <img src="assets/img/icon-max.svg" alt="MAX" />
+          </a>
+        </div>
+
+        <button class="nav-toggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
 
     <div class="mobile-menu" id="mobile-menu">
       <ul class="mobile-menu__list">
         <li><a class="mobile-menu__link" href="#about">О центре</a></li>
+        <li><a class="mobile-menu__link" href="#specialists">Специалисты</a></li>
         <li><a class="mobile-menu__link" href="#masters">Мастера</a></li>
-        <li><a class="mobile-menu__link" href="#specialists">Видео</a></li>
+        <li><a class="mobile-menu__link" href="#reviews">Отзывы</a></li>
         <li><a class="mobile-menu__link" href="#services">Услуги</a></li>
+        <li><a class="mobile-menu__link" href="#problems">Направления</a></li>
         <li><a class="mobile-menu__link" href="#contact">Контакты</a></li>
         <li><a class="btn btn--primary mobile-menu__cta" href="#contact">Записаться на приём</a></li>
       </ul>
@@ -55,6 +82,33 @@
 
     <!-- ============ HERO ============ -->
     <section class="hero">
+      <!-- Арканный круг (вращается за заголовком) -->
+      <div class="hero__sigil" aria-hidden="true">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor">
+          <g class="sigil-spin">
+            <circle cx="100" cy="100" r="96" stroke-width="0.6" />
+            <circle cx="100" cy="100" r="88" stroke-width="2" stroke-dasharray="1.5 6" />
+            <circle cx="100" cy="100" r="70" stroke-width="0.5" />
+            <circle cx="100" cy="100" r="6"  stroke-width="0.5" fill="currentColor" fill-opacity="0.35" />
+            <circle cx="100" cy="4"   r="2.2" fill="currentColor" stroke="none" />
+            <circle cx="100" cy="196" r="2.2" fill="currentColor" stroke="none" />
+            <circle cx="4"   cy="100" r="2.2" fill="currentColor" stroke="none" />
+            <circle cx="196" cy="100" r="2.2" fill="currentColor" stroke="none" />
+          </g>
+          <g class="sigil-spin sigil-spin--rev">
+            <circle cx="100" cy="100" r="58" stroke-width="0.6" stroke-dasharray="2 7" />
+            <polygon points="100,52 142,124 58,124" stroke-width="0.6" />
+            <polygon points="100,148 142,76 58,76" stroke-width="0.6" />
+          </g>
+        </svg>
+      </div>
+
+      <!-- Парящие золотые частицы -->
+      <div class="hero__particles" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+
       <div class="container hero__inner">
         <span class="overline hero__overline">Межрегиональный центр ясновидения и целительства</span>
         <h1 class="hero__title">Свет, который ведёт сквозь <em>тьму незнания</em></h1>
@@ -121,71 +175,12 @@
       </div>
     </section>
 
-    <!-- ============ МАСТЕРА ============ -->
-    <section class="section masters" id="masters">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="overline section-head__overline">Мастера центра</span>
-          <h2 class="section-head__title">Целители и ясновидящие</h2>
-          <p class="section-head__sub">Разные дары — одна общая работа: вернуть человеку ясность.</p>
-        </div>
-
-        <div class="masters__grid">
-          <article class="master-card reveal">
-            <div class="master-card__mark" aria-hidden="true">М</div>
-            <h3 class="master-card__name">Мирослав</h3>
-            <span class="master-card__role">Основатель · Ясновидение</span>
-            <p class="master-card__desc">
-              Родовой дар, передающийся в семье из поколения в поколение.
-              Видит истоки проблемы там, где другие видят только симптом.
-            </p>
-          </article>
-
-          <article class="master-card reveal">
-            <div class="master-card__mark" aria-hidden="true">КП</div>
-            <h3 class="master-card__name">Константин Юрьевич Петров</h3>
-            <span class="master-card__role">Снятие порчи и венца безбрачия</span>
-            <p class="master-card__desc">
-              Работает с тяжёлыми, затяжными случаями. Спокойная, методичная
-              манера ведения приёма — без лишних слов, только результат.
-            </p>
-          </article>
-
-          <article class="master-card reveal">
-            <div class="master-card__mark" aria-hidden="true">АЯ</div>
-            <h3 class="master-card__name">Андрей Владимирович Ясный</h3>
-            <span class="master-card__role">Диагностика судьбы и ауры</span>
-            <p class="master-card__desc">
-              Проясняет запутанные жизненные ситуации: выбор пути, отношения,
-              застой в делах. Имя — не случайность, а отражение сути работы.
-            </p>
-          </article>
-
-          <article class="master-card reveal">
-            <div class="master-card__mark" aria-hidden="true">А</div>
-            <h3 class="master-card__name">Алевтина</h3>
-            <span class="master-card__role">Народное травничество</span>
-            <p class="master-card__desc">
-              Хранительница рецептов и обрядов, передающихся в устной традиции.
-              Подбирает травяные обереги индивидуально под каждый случай.
-            </p>
-          </article>
-
-          <article class="master-card reveal">
-            <div class="master-card__mark" aria-hidden="true">Мг</div>
-            <h3 class="master-card__name">Магдалена</h3>
-            <span class="master-card__role">Экстренная энергетическая помощь</span>
-            <p class="master-card__desc">
-              Самый сильный канал в центре. Берёт самые тяжёлые и срочные
-              обращения, когда требуется немедленное вмешательство.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
     <!-- ============ НАШИ СПЕЦИАЛИСТЫ (ВИДЕО) ============ -->
     <section class="section specialists" id="specialists">
+      <div class="starfield" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
       <div class="container">
         <div class="section-head reveal">
           <span class="overline section-head__overline">Видеознакомство</span>
@@ -249,12 +244,288 @@
               </button>
             </div>
           </article>
+
+          <!-- Видео 5 -->
+          <article class="specialist-card reveal">
+            <div class="specialist-card__media">
+              <video class="specialist-card__video" preload="metadata" playsinline controls
+                     aria-label="Видеообращение специалиста">
+                <source src="assets/videos/5.MP4#t=0.1" type="video/mp4" />
+                Ваш браузер не поддерживает воспроизведение видео.
+              </video>
+              <button type="button" class="specialist-card__play" aria-label="Смотреть видео">
+                <span class="specialist-card__play-icon" aria-hidden="true">&#9658;</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Видео 6 -->
+          <article class="specialist-card reveal">
+            <div class="specialist-card__media">
+              <video class="specialist-card__video" preload="metadata" playsinline controls
+                     aria-label="Видеообращение специалиста">
+                <source src="assets/videos/6.MP4#t=0.1" type="video/mp4" />
+                Ваш браузер не поддерживает воспроизведение видео.
+              </video>
+              <button type="button" class="specialist-card__play" aria-label="Смотреть видео">
+                <span class="specialist-card__play-icon" aria-hidden="true">&#9658;</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Видео 7 -->
+          <article class="specialist-card reveal">
+            <div class="specialist-card__media">
+              <video class="specialist-card__video" preload="metadata" playsinline controls
+                     aria-label="Видеообращение специалиста">
+                <source src="assets/videos/7.MP4#t=0.1" type="video/mp4" />
+                Ваш браузер не поддерживает воспроизведение видео.
+              </video>
+              <button type="button" class="specialist-card__play" aria-label="Смотреть видео">
+                <span class="specialist-card__play-icon" aria-hidden="true">&#9658;</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Видео 8 -->
+          <article class="specialist-card reveal">
+            <div class="specialist-card__media">
+              <video class="specialist-card__video" preload="metadata" playsinline controls
+                     aria-label="Видеообращение специалиста">
+                <source src="assets/videos/8.MP4#t=0.1" type="video/mp4" />
+                Ваш браузер не поддерживает воспроизведение видео.
+              </video>
+              <button type="button" class="specialist-card__play" aria-label="Смотреть видео">
+                <span class="specialist-card__play-icon" aria-hidden="true">&#9658;</span>
+              </button>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
+    <!-- ============ МАСТЕРА ============ -->
+    <section class="section masters" id="masters">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="overline section-head__overline">Мастера центра</span>
+          <h2 class="section-head__title">Целители и ясновидящие</h2>
+          <p class="section-head__sub">Разные дары — одна общая работа: вернуть человеку ясность.</p>
+        </div>
+
+        <div class="masters__grid">
+          <article class="master-card reveal">
+            <div class="master-card__mark" aria-hidden="true">М</div>
+            <h3 class="master-card__name">Мирослав</h3>
+            <span class="master-card__role">Основатель · Ясновидение</span>
+            <p class="master-card__desc">
+              Родовой дар, передающийся в семье из поколения в поколение.
+              Видит истоки проблемы там, где другие видят только симптом.
+            </p>
+          </article>
+
+          <article class="master-card reveal">
+            <div class="master-card__mark" aria-hidden="true">АЯ</div>
+            <h3 class="master-card__name">Андрей Владимирович Ясный</h3>
+            <span class="master-card__role">Диагностика судьбы и ауры</span>
+            <p class="master-card__desc">
+              Проясняет запутанные жизненные ситуации: выбор пути, отношения,
+              застой в делах. Имя — не случайность, а отражение сути работы.
+            </p>
+          </article>
+
+          <article class="master-card reveal">
+            <div class="master-card__mark" aria-hidden="true">А</div>
+            <h3 class="master-card__name">Алевтина</h3>
+            <span class="master-card__role">Народное травничество</span>
+            <p class="master-card__desc">
+              Хранительница рецептов и обрядов, передающихся в устной традиции.
+              Подбирает травяные обереги индивидуально под каждый случай.
+            </p>
+          </article>
+
+          <article class="master-card reveal">
+            <div class="master-card__mark" aria-hidden="true">Мг</div>
+            <h3 class="master-card__name">Магдалена</h3>
+            <span class="master-card__role">Экстренная энергетическая помощь</span>
+            <p class="master-card__desc">
+              Самый сильный канал в центре. Берёт самые тяжёлые и срочные
+              обращения, когда требуется немедленное вмешательство.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ОТЗЫВЫ ============ -->
+    <section class="section reviews" id="reviews">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="overline section-head__overline">Отзывы</span>
+          <h2 class="section-head__title">Что говорят обратившиеся</h2>
+          <p class="section-head__sub">Живые истории людей, которые нашли ответ и помощь в нашем центре.</p>
+        </div>
+
+        <div class="reviews-carousel reveal">
+          <button type="button" class="reviews-nav reviews-nav--prev" aria-label="Предыдущие отзывы">&#8249;</button>
+
+          <div class="reviews-track" id="reviews-track">
+            <article class="review-card">
+              <div class="review-card__head">
+                <img class="review-card__avatar" src="assets/img/reviews/r1.jpg" alt="Марина К." loading="lazy" />
+                <div class="review-card__meta">
+                  <div class="review-card__name">Марина К.</div>
+                  <div class="review-card__stars" role="img" aria-label="Оценка 5 из 5">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-card__text">Обращалась после тяжёлого развода, всё валилось из рук. Андрей Владимирович за один сеанс объяснил то, что я сама не могла понять годами. Через пару месяцев жизнь реально начала выправляться.</p>
+            </article>
+
+            <article class="review-card">
+              <div class="review-card__head">
+                <img class="review-card__avatar" src="assets/img/reviews/r2.jpg" alt="Андрей С." loading="lazy" />
+                <div class="review-card__meta">
+                  <div class="review-card__name">Андрей С.</div>
+                  <div class="review-card__stars" role="img" aria-label="Оценка 5 из 5">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-card__text">Скептик до мозга костей, пришёл скорее «для галочки». Но после работы по снятию негатива дела в бизнесе сдвинулись с мёртвой точки. Не знаю как, но это работает.</p>
+            </article>
+
+            <article class="review-card">
+              <div class="review-card__head">
+                <img class="review-card__avatar" src="assets/img/reviews/r3.jpg" alt="Ольга В." loading="lazy" />
+                <div class="review-card__meta">
+                  <div class="review-card__name">Ольга В.</div>
+                  <div class="review-card__stars" role="img" aria-label="Оценка 4 из 5">★★★★<span class="review-card__star--off">★</span></div>
+                </div>
+              </div>
+              <p class="review-card__text">Долго не решалась. Приняли спокойно, без театра и запугиваний — это и подкупило. Результат пришёл не сразу, но пришёл. Снимаю звезду только за то, что ждать пришлось дольше, чем рассчитывала.</p>
+            </article>
+
+            <article class="review-card">
+              <div class="review-card__head">
+                <img class="review-card__avatar" src="assets/img/reviews/r4.jpg" alt="Дмитрий Л." loading="lazy" />
+                <div class="review-card__meta">
+                  <div class="review-card__name">Дмитрий Л.</div>
+                  <div class="review-card__stars" role="img" aria-label="Оценка 5 из 5">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-card__text">Делали защиту на дом, когда в семье пошли постоянные ссоры буквально на пустом месте. Атмосфера в квартире изменилась за неделю. Сам не ожидал. Спасибо.</p>
+            </article>
+
+            <article class="review-card">
+              <div class="review-card__head">
+                <img class="review-card__avatar" src="assets/img/reviews/r5.jpg" alt="Екатерина М." loading="lazy" />
+                <div class="review-card__meta">
+                  <div class="review-card__name">Екатерина М.</div>
+                  <div class="review-card__stars" role="img" aria-label="Оценка 5 из 5">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-card__text">Алевтина подобрала травяной сбор, когда врачи только разводили руками. Впервые за год стала нормально спать. Очень тёплый, человечный подход — чувствуешь, что о тебе действительно заботятся.</p>
+            </article>
+
+            <article class="review-card">
+              <div class="review-card__head">
+                <img class="review-card__avatar" src="assets/img/reviews/r6.jpg" alt="Сергей П." loading="lazy" />
+                <div class="review-card__meta">
+                  <div class="review-card__name">Сергей П.</div>
+                  <div class="review-card__stars" role="img" aria-label="Оценка 4 из 5">★★★★<span class="review-card__star--off">★</span></div>
+                </div>
+              </div>
+              <p class="review-card__text">Принимали дистанционно, я живу в другом регионе. Сомневался, что на расстоянии что-то выйдет — оказалось, зря. Связь держали, всё подробно объясняли. Придраться особо не к чему.</p>
+            </article>
+
+            <article class="review-card">
+              <div class="review-card__head">
+                <img class="review-card__avatar" src="assets/img/reviews/r7.jpg" alt="Наталья Ж." loading="lazy" />
+                <div class="review-card__meta">
+                  <div class="review-card__name">Наталья Ж.</div>
+                  <div class="review-card__stars" role="img" aria-label="Оценка 5 из 5">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-card__text">Магдалена выручила в по-настоящему критической ситуации, когда счёт шёл на дни. Откликнулась сразу, приняла вне очереди. Низкий поклон этому человеку.</p>
+            </article>
+
+            <article class="review-card">
+              <div class="review-card__head">
+                <img class="review-card__avatar" src="assets/img/reviews/r8.jpg" alt="Виктор Т." loading="lazy" />
+                <div class="review-card__meta">
+                  <div class="review-card__name">Виктор Т.</div>
+                  <div class="review-card__stars" role="img" aria-label="Оценка 5 из 5">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-card__text">Несколько лет не складывались отношения, будто что-то держало. После работы с венцом безбрачия впервые за долгое время встретил близкого человека. Сам до конца не верю, но это факт.</p>
+            </article>
+
+            <article class="review-card">
+              <div class="review-card__head">
+                <img class="review-card__avatar" src="assets/img/reviews/r9.jpg" alt="Людмила Р." loading="lazy" />
+                <div class="review-card__meta">
+                  <div class="review-card__name">Людмила Р.</div>
+                  <div class="review-card__stars" role="img" aria-label="Оценка 4 из 5">★★★★<span class="review-card__star--off">★</span></div>
+                </div>
+              </div>
+              <p class="review-card__text">Разбирались с родовыми историями, многое про семью встало на свои места. Разговор был тяжёлый, но честный. Хотелось бы чуть больше конкретики по дальнейшим шагам, но в целом очень благодарна.</p>
+            </article>
+
+            <article class="review-card">
+              <div class="review-card__head">
+                <img class="review-card__avatar" src="assets/img/reviews/r10.jpg" alt="Алексей Н." loading="lazy" />
+                <div class="review-card__meta">
+                  <div class="review-card__name">Алексей Н.</div>
+                  <div class="review-card__stars" role="img" aria-label="Оценка 5 из 5">★★★★★</div>
+                </div>
+              </div>
+              <p class="review-card__text">Пришёл с полным раздраем в голове. Ушёл с ясным пониманием, что делать дальше. Это дороже любых денег. Рекомендую всем, кто застрял и не видит выхода.</p>
+            </article>
+          </div>
+
+          <button type="button" class="reviews-nav reviews-nav--next" aria-label="Следующие отзывы">&#8250;</button>
+        </div>
+
+        <div class="reviews-dots" id="reviews-dots" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- Разделитель: фазы луны -->
+    <div class="container moon-divider" aria-hidden="true">
+      <span class="moon moon--new"></span>
+      <span class="moon moon--cres-r"></span>
+      <span class="moon moon--half-r"></span>
+      <span class="moon moon--full"></span>
+      <span class="moon moon--half-l"></span>
+      <span class="moon moon--cres-l"></span>
+      <span class="moon moon--new"></span>
+    </div>
+
     <!-- ============ УСЛУГИ ============ -->
     <section class="section services" id="services">
+      <!-- Лучистый орнамент-солнце (вращается на фоне) -->
+      <div class="services__ornament" aria-hidden="true">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor">
+          <g class="sun-spin">
+            <circle cx="100" cy="100" r="96" stroke-width="0.6" />
+            <circle cx="100" cy="100" r="44" stroke-width="0.6" />
+            <circle cx="100" cy="100" r="7" stroke-width="0.6" fill="currentColor" fill-opacity="0.3" />
+            <line x1="144" y1="100" x2="190" y2="100" stroke-width="0.7" />
+            <line x1="138.1" y1="122" x2="177.9" y2="145" stroke-width="0.7" />
+            <line x1="122" y1="138.1" x2="145" y2="177.9" stroke-width="0.7" />
+            <line x1="100" y1="144" x2="100" y2="190" stroke-width="0.7" />
+            <line x1="78" y1="138.1" x2="55" y2="177.9" stroke-width="0.7" />
+            <line x1="61.9" y1="122" x2="22.1" y2="145" stroke-width="0.7" />
+            <line x1="56" y1="100" x2="10" y2="100" stroke-width="0.7" />
+            <line x1="61.9" y1="78" x2="22.1" y2="55" stroke-width="0.7" />
+            <line x1="78" y1="61.9" x2="55" y2="22.1" stroke-width="0.7" />
+            <line x1="100" y1="56" x2="100" y2="10" stroke-width="0.7" />
+            <line x1="122" y1="61.9" x2="145" y2="22.1" stroke-width="0.7" />
+            <line x1="138.1" y1="78" x2="177.9" y2="55" stroke-width="0.7" />
+          </g>
+        </svg>
+      </div>
+      <div class="starfield starfield--few" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
       <div class="container">
         <div class="section-head reveal">
           <span class="overline section-head__overline">Направления работы</span>
@@ -301,15 +572,181 @@
       </div>
     </section>
 
+    <!-- ============ С КАКИМИ ПРОБЛЕМАМИ МЫ РАБОТАЕМ ============ -->
+    <section class="section problems" id="problems">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="overline section-head__overline">Направления</span>
+          <h2 class="section-head__title">С какими проблемами мы работаем</h2>
+          <p class="section-head__sub">Каждому случаю — свой мастер и метод. Ниже основные направления нашей работы.</p>
+        </div>
+
+        <div class="problems__grid">
+          <article class="problem-card reveal">
+            <div class="problem-card__head">
+              <span class="problem-card__num">01</span>
+              <h3 class="problem-card__title">Привороты и любовная магия</h3>
+            </div>
+            <ul class="problem-card__list">
+              <li>Приворот на любовь (белый, красный, чёрный)</li>
+              <li>Приворот на мужчину / на женщину</li>
+              <li>Приворот на возврат бывшего / бывшей</li>
+              <li>Венец безбрачия — диагностика и снятие</li>
+              <li>Любовный заговор на брак и верность</li>
+              <li>Отворот от соперницы / соперника</li>
+              <li>Рассорка между людьми</li>
+              <li>Привязка на расстоянии</li>
+              <li>Сексуальная привязка</li>
+              <li>Снятие чужого приворота</li>
+            </ul>
+          </article>
+
+          <article class="problem-card reveal">
+            <div class="problem-card__head">
+              <span class="problem-card__num">02</span>
+              <h3 class="problem-card__title">Порча и негативные программы</h3>
+            </div>
+            <ul class="problem-card__list">
+              <li>Порча на одиночество</li>
+              <li>Порча на бедность и неудачи</li>
+              <li>Порча на болезнь</li>
+              <li>Порча на смерть — диагностика и нейтрализация</li>
+              <li>Родовое проклятие</li>
+              <li>Сглаз (бытовой, завистливый, детский)</li>
+              <li>Наговор и проклятие</li>
+              <li>Чёрная метка</li>
+              <li>Энергетический вампиризм</li>
+              <li>Снятие негативных программ с рода</li>
+            </ul>
+          </article>
+
+          <article class="problem-card reveal">
+            <div class="problem-card__head">
+              <span class="problem-card__num">03</span>
+              <h3 class="problem-card__title">Чёрная магия</h3>
+            </div>
+            <ul class="problem-card__list">
+              <li>Вуду — снятие воздействия</li>
+              <li>Кладбищенская магия — диагностика и защита</li>
+              <li>Некромантическое воздействие</li>
+              <li>Ритуальное проклятие</li>
+              <li>Чёрный ритуал на разрушение семьи</li>
+              <li>Магическая блокировка судьбы</li>
+              <li>Снятие кровавого заклятья</li>
+              <li>Разрушение магического треугольника</li>
+            </ul>
+          </article>
+
+          <article class="problem-card reveal">
+            <div class="problem-card__head">
+              <span class="problem-card__num">04</span>
+              <h3 class="problem-card__title">Защита и обереги</h3>
+            </div>
+            <ul class="problem-card__list">
+              <li>Защитный купол от негатива</li>
+              <li>Щит от сглаза и зависти</li>
+              <li>Оберег на дом и семью</li>
+              <li>Защита бизнеса от конкурентов</li>
+              <li>Руническая защита</li>
+              <li>Амулет на удачу и успех</li>
+              <li>Защита ребёнка от сглаза</li>
+              <li>Нейтрализация чёрного колдуна</li>
+            </ul>
+          </article>
+
+          <article class="problem-card reveal">
+            <div class="problem-card__head">
+              <span class="problem-card__num">05</span>
+              <h3 class="problem-card__title">Деньги, бизнес и карьера</h3>
+            </div>
+            <ul class="problem-card__list">
+              <li>Денежный поток — открытие</li>
+              <li>Снятие блока на деньги</li>
+              <li>Привлечение клиентов и партнёров</li>
+              <li>Удача в торговле и бизнесе</li>
+              <li>Карьерный рост — магическое содействие</li>
+              <li>Защита бизнеса от чёрной магии конкурентов</li>
+              <li>Возврат долгов</li>
+              <li>Талисман на финансовый успех</li>
+            </ul>
+          </article>
+
+          <article class="problem-card reveal">
+            <div class="problem-card__head">
+              <span class="problem-card__num">06</span>
+              <h3 class="problem-card__title">Здоровье и исцеление</h3>
+            </div>
+            <ul class="problem-card__list">
+              <li>Целительство через сновидения</li>
+              <li>Энергетическое исцеление</li>
+              <li>Снятие болезни, наведённой магически</li>
+              <li>Работа с хроническими заболеваниями</li>
+              <li>Восстановление жизненных сил</li>
+              <li>Очищение ауры</li>
+              <li>Лечение зависимостей (алкоголь, игры) через воздействие</li>
+              <li>Работа с психосоматикой</li>
+            </ul>
+          </article>
+
+          <article class="problem-card reveal">
+            <div class="problem-card__head">
+              <span class="problem-card__num">07</span>
+              <h3 class="problem-card__title">Диагностика и экстрасенсорика</h3>
+            </div>
+            <ul class="problem-card__list">
+              <li>Полная диагностика ауры и кармы</li>
+              <li>Определение наличия порчи / сглаза</li>
+              <li>Чтение судьбы по фото</li>
+              <li>Связь с ушедшими (медиумизм)</li>
+              <li>Поиск пропавших людей и вещей</li>
+              <li>Прояснение ситуации на работе / в семье</li>
+              <li>Диагностика рода до 7 колена</li>
+              <li>Экстрасенсорная консультация онлайн</li>
+            </ul>
+          </article>
+
+          <article class="problem-card reveal">
+            <div class="problem-card__head">
+              <span class="problem-card__num">08</span>
+              <h3 class="problem-card__title">Отношения и семья</h3>
+            </div>
+            <ul class="problem-card__list">
+              <li>Восстановление отношений после измены</li>
+              <li>Примирение супругов</li>
+              <li>Снятие венца безбрачия</li>
+              <li>Программирование на встречу с партнёром</li>
+              <li>Защита семьи от разлучницы</li>
+              <li>Усиление чувств в паре</li>
+              <li>Работа с ревностью и недоверием</li>
+              <li>Возврат мужа / жены в семью</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ ЦИТАТА ОСНОВАТЕЛЯ ============ -->
     <section class="section founder-quote">
+      <div class="sparkles" aria-hidden="true">
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+      </div>
       <div class="container reveal">
+        <figure class="candles" aria-hidden="true">
+          <div class="candle candle--lit">
+            <span class="candle__flame"></span>
+            <span class="candle__body"></span>
+          </div>
+          <div class="candle candle--unlit">
+            <span class="candle__smoke"></span>
+            <span class="candle__body"></span>
+          </div>
+        </figure>
         <p class="founder-quote__text">
           «Мы не предсказываем будущее — мы помогаем увидеть настоящее так,
           как оно есть».
         </p>
         <p class="founder-quote__author">Мирослав, основатель центра</p>
-        <div class="star-orb" aria-hidden="true"><span>&#10022;</span></div>
       </div>
     </section>
 
@@ -382,9 +819,24 @@
       <a href="#top" class="site-footer__logo" aria-label="Центр имени Мирослава — наверх">
         <img src="assets/img/logo.jpg" alt="Центр ясновидения и целительства имени Мирослава" />
       </a>
+
+      <div class="messengers messengers--footer" aria-label="Мессенджеры для связи">
+        <a class="messenger-icon" href="https://wa.me/79852867618" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">
+          <img src="assets/img/icon-whatsapp.svg" alt="WhatsApp" />
+        </a>
+        <!-- MAX: подставьте href="https://max.ru/u/ХЕШ" (ссылка из приложения MAX, см. README) -->
+        <a class="messenger-icon" aria-label="Написать в MAX">
+          <img src="assets/img/icon-max.svg" alt="MAX" />
+        </a>
+      </div>
+
       <p class="site-footer__copy">
-        © 2021–2026 Межрегиональный центр ясновидения и целительства имени Мирослава.<br />
+        © 2005–2026 Межрегиональный центр ясновидения и целительства имени Мирослава.<br />
         Все права защищены. Приём очно и дистанционно.
+      </p>
+      <p class="site-footer__legal">
+        Юридический адрес: г. Москва, вн.тер.г. муниципальный округ Лосиноостровский,<br />
+        пр-д Анадырский, д. 47, к. 1, кв. 133
       </p>
     </div>
   </footer>

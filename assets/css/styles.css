@@ -82,6 +82,40 @@ body {
 }
 .star-orb span { color: var(--c-gold); font-size: 1.1rem; line-height: 1; }
 
+/* Орнамент-разделитель: фазы луны */
+.moon-divider {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  gap: clamp(0.7rem, 4vw, 1.9rem);
+  padding-block: var(--space-2xl);
+}
+.moon-divider::before {
+  content: ""; position: absolute; left: 12%; right: 12%; top: 50%;
+  height: 1px; background: var(--c-line); z-index: 0;
+}
+.moon {
+  position: relative; z-index: 1; flex-shrink: 0;
+  width: 18px; height: 18px; border-radius: 50%;
+}
+.moon--new { border: 1px solid var(--c-gold-soft); background: var(--c-bg); }
+.moon--full { background: var(--c-gold); box-shadow: 0 0 10px rgba(191,154,78,0.55); }
+.moon--half-r {
+  border: 1px solid var(--c-gold-soft);
+  background: linear-gradient(90deg, var(--c-bg) 50%, var(--c-gold) 50%);
+}
+.moon--half-l {
+  border: 1px solid var(--c-gold-soft);
+  background: linear-gradient(90deg, var(--c-gold) 50%, var(--c-bg) 50%);
+}
+.moon--cres-r, .moon--cres-l {
+  background: var(--c-gold); border: 1px solid var(--c-gold-soft); overflow: hidden;
+}
+.moon--cres-r::before, .moon--cres-l::before {
+  content: ""; position: absolute; inset: -1px; border-radius: 50%; background: var(--c-bg);
+}
+.moon--cres-r::before { transform: translateX(-42%); } /* остаётся правый серп */
+.moon--cres-l::before { transform: translateX(42%); }  /* остаётся левый серп */
+
 /* ---------- Кнопки ---------- */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.5em;
@@ -102,20 +136,68 @@ body {
 /* ============================================================
    ШАПКА
    ============================================================ */
+/* ============================================================
+   ЛОГОТИП-БАННЕР (большой логотип над навбаром)
+   ============================================================ */
+.brand-banner {
+  isolation: isolate; /* чтобы blend-mode логотипа смешивался только с фоном баннера */
+  text-align: center;
+  padding-block: clamp(1.4rem, 4vw, 2.75rem);
+  background:
+    radial-gradient(ellipse at 50% 60%, rgba(191,154,78,0.10) 0%, rgba(191,154,78,0) 62%),
+    var(--c-bg);
+}
+.brand-banner__inner {
+  display: flex; align-items: center; justify-content: center;
+  gap: clamp(1rem, 5vw, 2.75rem);
+}
+.brand-banner__logo { display: inline-block; flex-shrink: 0; line-height: 0; }
+.brand-banner__logo img {
+  height: 132px; width: auto; display: block;
+  mix-blend-mode: darken; /* убирает белый фон, сливая его с кремовым */
+}
+/* Декоративные золотые линии по бокам */
+.brand-banner__rule {
+  flex: 1 1 0; height: 1px; max-width: 200px;
+  background: linear-gradient(to right, rgba(191,154,78,0) 0%, var(--c-gold-soft) 100%);
+}
+.brand-banner__rule:last-child {
+  background: linear-gradient(to left, rgba(191,154,78,0) 0%, var(--c-gold-soft) 100%);
+}
+
+/* ============================================================
+   ШАПКА (навбар)
+   ============================================================ */
 .site-header {
   position: sticky; top: 0; z-index: 50;
-  background: rgba(250, 248, 243, 0.82);
-  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  isolation: isolate;
+  background: var(--c-bg);
   border-bottom: 1px solid var(--c-line);
 }
 .site-header__inner {
   display: flex; align-items: center; justify-content: space-between;
-  min-height: 72px;
+  min-height: 72px; padding-block: 8px;
 }
 .brand { display: inline-flex; align-items: center; gap: 0.7rem; }
 .brand__logo {
-  height: 46px; width: auto; display: block; flex-shrink: 0;
+  height: 42px; width: auto; display: block; flex-shrink: 0;
+  mix-blend-mode: darken; /* убирает белый фон знака */
 }
+
+/* Правый кластер шапки: навигация + мессенджеры + бургер */
+.site-header__right {
+  display: flex; align-items: center; gap: var(--space-md);
+}
+
+/* Иконки мессенджеров (WhatsApp / MAX) */
+.messengers { display: inline-flex; align-items: center; gap: 0.5rem; }
+.messenger-icon { display: inline-flex; }
+.messenger-icon img {
+  width: 30px; height: 30px; display: block; border-radius: 8px;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.3s var(--ease);
+}
+.messenger-icon:hover img { transform: translateY(-2px) scale(1.06); }
 .brand__mark {
   display: grid; place-items: center;
   width: 38px; height: 38px; border-radius: 50%;
@@ -127,7 +209,7 @@ body {
   color: var(--c-heading); letter-spacing: 0.01em;
 }
 .nav { display: none; }
-.nav__list { display: flex; align-items: center; gap: var(--space-lg); }
+.nav__list { display: flex; align-items: center; gap: var(--space-md); }
 .nav__link {
   font-size: 0.9rem; color: var(--c-ink-soft); letter-spacing: 0.02em;
   position: relative; padding-block: 0.25rem; transition: color 0.3s var(--ease);
@@ -152,7 +234,7 @@ body {
 .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
 .mobile-menu {
-  position: fixed; inset: 72px 0 auto 0;
+  position: absolute; top: 100%; left: 0; right: 0;
   background: var(--c-bg); border-bottom: 1px solid var(--c-line);
   box-shadow: var(--shadow-soft);
   transform: translateY(-12px); opacity: 0; visibility: hidden;
@@ -177,7 +259,48 @@ body {
   background: radial-gradient(ellipse at center, rgba(191,154,78,0.10) 0%, rgba(191,154,78,0) 70%);
   pointer-events: none;
 }
-.hero__inner { position: relative; max-width: var(--measure); margin-inline: auto; }
+/* Арканный круг-сигил */
+.hero__sigil {
+  position: absolute; top: 42%; left: 50%;
+  width: min(560px, 92vw); aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  color: var(--c-gold); opacity: 0.18;
+  pointer-events: none; z-index: 0;
+}
+.hero__sigil svg { width: 100%; height: 100%; display: block; }
+.sigil-spin {
+  transform-box: fill-box; transform-origin: center;
+  animation: sigil-rotate 90s linear infinite;
+}
+.sigil-spin--rev { animation-duration: 70s; animation-direction: reverse; }
+@keyframes sigil-rotate { to { transform: rotate(360deg); } }
+
+/* Парящие золотые частицы */
+.hero__particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.hero__particles span {
+  position: absolute; bottom: -12px; width: 5px; height: 5px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(216,192,137,0.95) 0%, rgba(191,154,78,0) 70%);
+  opacity: 0; animation: particle-rise linear infinite;
+}
+.hero__particles span:nth-child(1)  { left: 7%;  animation-duration: 14s; animation-delay: 0s;   }
+.hero__particles span:nth-child(2)  { left: 18%; animation-duration: 18s; animation-delay: 4s;  width: 3px; height: 3px; }
+.hero__particles span:nth-child(3)  { left: 29%; animation-duration: 12s; animation-delay: 1.5s; }
+.hero__particles span:nth-child(4)  { left: 40%; animation-duration: 20s; animation-delay: 6s;  width: 6px; height: 6px; }
+.hero__particles span:nth-child(5)  { left: 51%; animation-duration: 15s; animation-delay: 2.5s; width: 3px; height: 3px; }
+.hero__particles span:nth-child(6)  { left: 61%; animation-duration: 17s; animation-delay: 7s;  }
+.hero__particles span:nth-child(7)  { left: 72%; animation-duration: 13s; animation-delay: 3.5s; width: 4px; height: 4px; }
+.hero__particles span:nth-child(8)  { left: 81%; animation-duration: 19s; animation-delay: 5s;  width: 3px; height: 3px; }
+.hero__particles span:nth-child(9)  { left: 90%; animation-duration: 16s; animation-delay: 1s;  }
+.hero__particles span:nth-child(10) { left: 95%; animation-duration: 21s; animation-delay: 8s;  width: 6px; height: 6px; }
+@keyframes particle-rise {
+  0%   { transform: translate(0, 0) scale(0.6); opacity: 0; }
+  12%  { opacity: 0.9; }
+  50%  { transform: translate(12px, -260px) scale(1); opacity: 0.75; }
+  85%  { opacity: 0.4; }
+  100% { transform: translate(-10px, -540px) scale(0.4); opacity: 0; }
+}
+
+.hero__inner { position: relative; z-index: 1; max-width: var(--measure); margin-inline: auto; }
 .hero__overline { display: block; margin-bottom: var(--space-md); }
 .hero__title {
   font-family: var(--font-display); font-size: var(--fs-display); font-weight: 700;
@@ -241,12 +364,13 @@ body {
    ============================================================ */
 .masters { background: var(--c-bg-soft); }
 .masters__grid {
-  display: grid; gap: var(--space-md);
+  display: grid; gap: var(--space-lg);
   grid-template-columns: 1fr;
+  max-width: 820px; margin-inline: auto;
 }
 .master-card {
   background: var(--c-surface); border: 1px solid var(--c-line);
-  border-radius: var(--radius); padding: var(--space-lg);
+  border-radius: var(--radius); padding: clamp(1.75rem, 4vw, 2.85rem);
   transition: transform 0.4s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
 }
 .master-card:hover {
@@ -255,9 +379,9 @@ body {
 }
 .master-card__mark {
   display: grid; place-items: center;
-  width: 60px; height: 60px; border-radius: 50%;
+  width: 68px; height: 68px; border-radius: 50%;
   border: 1px solid var(--c-gold); color: var(--c-gold-deep);
-  font-family: var(--font-display); font-size: 1.05rem; letter-spacing: 0.02em;
+  font-family: var(--font-display); font-size: 1.2rem; letter-spacing: 0.02em;
   margin-bottom: var(--space-md);
 }
 .master-card__name {
@@ -339,6 +463,135 @@ body {
   opacity: 0; visibility: hidden;
 }
 
+/* Пульсирующее кольцо у кнопки play — приглашает нажать */
+.specialist-card__play-icon { position: relative; }
+.specialist-card__play-icon::before {
+  content: ""; position: absolute; inset: -7px; border-radius: 50%;
+  border: 1px solid var(--c-gold-soft); pointer-events: none;
+  animation: play-pulse 2.6s ease-out infinite;
+}
+@keyframes play-pulse {
+  0%        { transform: scale(0.85); opacity: 0.75; }
+  70%, 100% { transform: scale(1.5);  opacity: 0; }
+}
+
+/* ============================================================
+   АТМОСФЕРА: звёздное поле + лучистое солнце
+   (используется в секциях «Специалисты» и «Услуги»)
+   ============================================================ */
+.specialists, .services { position: relative; overflow: hidden; }
+.specialists > .container, .services > .container { position: relative; z-index: 1; }
+
+.starfield { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.starfield span {
+  position: absolute; width: 5px; height: 5px; border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 0%, var(--c-gold-soft) 45%, rgba(191,154,78,0) 75%);
+  opacity: 0; animation: star-twinkle 5s ease-in-out infinite;
+}
+.starfield span:nth-child(1)  { top: 12%; left: 10%; animation-delay: 0s; }
+.starfield span:nth-child(2)  { top: 22%; left: 86%; animation-delay: 1.3s; width: 3px; height: 3px; }
+.starfield span:nth-child(3)  { top: 40%; left: 48%; animation-delay: 2.6s; width: 6px; height: 6px; }
+.starfield span:nth-child(4)  { top: 65%; left: 16%; animation-delay: 0.7s; width: 4px; height: 4px; }
+.starfield span:nth-child(5)  { top: 78%; left: 74%; animation-delay: 3.2s; }
+.starfield span:nth-child(6)  { top: 30%; left: 32%; animation-delay: 1.9s; width: 3px; height: 3px; }
+.starfield span:nth-child(7)  { top: 55%; left: 90%; animation-delay: 2.2s; width: 4px; height: 4px; }
+.starfield span:nth-child(8)  { top: 88%; left: 40%; animation-delay: 0.4s; }
+.starfield span:nth-child(9)  { top: 15%; left: 62%; animation-delay: 3.8s; width: 3px; height: 3px; }
+.starfield span:nth-child(10) { top: 70%; left: 54%; animation-delay: 1.1s; width: 5px; height: 5px; }
+.starfield span:nth-child(11) { top: 48%; left: 6%;  animation-delay: 2.9s; width: 4px; height: 4px; }
+.starfield span:nth-child(12) { top: 84%; left: 92%; animation-delay: 1.6s; width: 3px; height: 3px; }
+@keyframes star-twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.4); }
+  50%      { opacity: 0.95; transform: scale(1); }
+}
+
+/* Лучистое солнце-орнамент в «Услугах» */
+.services__ornament {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: min(620px, 96vw); aspect-ratio: 1;
+  color: var(--c-gold); opacity: 0.10;
+  pointer-events: none; z-index: 0;
+}
+.services__ornament svg { width: 100%; height: 100%; display: block; }
+.sun-spin {
+  transform-box: fill-box; transform-origin: center;
+  animation: sun-rotate 120s linear infinite;
+}
+@keyframes sun-rotate { to { transform: rotate(360deg); } }
+
+/* ============================================================
+   ОТЗЫВЫ (карусель)
+   10 карточек, на десктопе видно по 4, прокрутка по «странице».
+   ============================================================ */
+.reviews-carousel { position: relative; }
+.reviews-track {
+  display: flex; gap: var(--space-md);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none; -ms-overflow-style: none;
+  padding-block: 0.5rem;
+}
+.reviews-track::-webkit-scrollbar { display: none; }
+
+.review-card {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-soft);
+  display: flex; flex-direction: column;
+}
+.review-card__head { display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-sm); }
+.review-card__avatar {
+  width: 54px; height: 54px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 1px solid var(--c-gold-soft);
+}
+.review-card__name { font-family: var(--font-display); font-size: 1.1rem; color: var(--c-heading); }
+.review-card__stars {
+  margin-top: 0.2rem; color: var(--c-gold);
+  font-size: 0.95rem; letter-spacing: 0.12em; line-height: 1;
+}
+.review-card__star--off { color: var(--c-line); }
+.review-card__text {
+  color: var(--c-ink-soft); font-size: 0.97rem; line-height: 1.65; font-style: italic;
+}
+
+/* Стрелки навигации (скрыты на мобильном — там свайп + точки) */
+.reviews-nav {
+  display: none;
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 46px; height: 46px; border-radius: 50%;
+  border: 1px solid var(--c-line); background: var(--c-surface);
+  color: var(--c-gold-deep); font-size: 1.6rem; line-height: 1;
+  place-items: center; z-index: 2;
+  box-shadow: var(--shadow-card);
+  transition: background-color 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.reviews-nav:hover { background: var(--c-gold); color: #fff; border-color: var(--c-gold); }
+.reviews-nav--prev { left: -18px; }
+.reviews-nav--next { right: -18px; }
+
+/* Точки-страницы */
+.reviews-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: var(--space-lg); }
+.reviews-dots button {
+  width: 8px; height: 8px; padding: 0; border-radius: 50%;
+  background: var(--c-line); border: none;
+  transition: background-color 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.reviews-dots button.is-active { background: var(--c-gold); transform: scale(1.35); }
+
+@media (min-width: 600px) {
+  .review-card { flex-basis: calc((100% - var(--space-md)) / 2); }
+  .reviews-nav { display: grid; }
+}
+@media (min-width: 980px) {
+  .review-card { flex-basis: calc((100% - 3 * var(--space-md)) / 4); }
+}
+
 /* ============================================================
    УСЛУГИ
    ============================================================ */
@@ -366,9 +619,79 @@ body {
 }
 
 /* ============================================================
+   С КАКИМИ ПРОБЛЕМАМИ МЫ РАБОТАЕМ
+   8 категорий-карточек со списками направлений.
+   ============================================================ */
+.problems { background: var(--c-bg-soft); }
+.problems__grid {
+  display: grid; gap: var(--space-md);
+  grid-template-columns: 1fr;
+}
+.problem-card {
+  background: var(--c-surface); border: 1px solid var(--c-line);
+  border-radius: var(--radius); padding: var(--space-lg);
+  box-shadow: var(--shadow-soft);
+  transition: border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+.problem-card:hover { border-color: var(--c-gold-soft); box-shadow: var(--shadow-card); }
+
+/* Тёплое золотое свечение карточек при наведении */
+.master-card:hover,
+.service-card:hover,
+.problem-card:hover {
+  box-shadow: var(--shadow-card), 0 0 30px -8px rgba(191, 154, 78, 0.38);
+}
+.problem-card__head {
+  display: flex; align-items: baseline; gap: 0.7rem;
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--c-line-soft);
+}
+.problem-card__num {
+  font-family: var(--font-display); font-size: 0.9rem; font-weight: 700;
+  letter-spacing: 0.1em; color: var(--c-gold); flex-shrink: 0;
+}
+.problem-card__title {
+  font-family: var(--font-display); font-size: var(--fs-h3);
+  color: var(--c-heading); font-weight: 600; line-height: 1.2;
+}
+.problem-card__list { display: flex; flex-direction: column; gap: 0.55rem; }
+.problem-card__list li {
+  position: relative; padding-left: 1.4rem;
+  color: var(--c-ink-soft); font-size: 0.97rem; line-height: 1.5;
+}
+.problem-card__list li::before {
+  content: "\25C6"; /* ◆ */
+  position: absolute; left: 0; top: 0.1em;
+  color: var(--c-gold-soft); font-size: 0.68rem;
+}
+
+/* ============================================================
    ЦИТАТА ОСНОВАТЕЛЯ
    ============================================================ */
-.founder-quote { text-align: center; }
+.founder-quote { text-align: center; position: relative; overflow: hidden; }
+
+/* Мерцающие искры */
+.sparkles { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.sparkles span {
+  position: absolute; width: 16px; height: 16px;
+  background: var(--c-gold-soft);
+  clip-path: polygon(50% 0%, 58% 42%, 100% 50%, 58% 58%, 50% 100%, 42% 58%, 0% 50%, 42% 42%);
+  opacity: 0; transform: scale(0.4);
+  filter: drop-shadow(0 0 5px rgba(216,192,137,0.8));
+  animation: sparkle-twinkle 4s ease-in-out infinite;
+}
+.sparkles span:nth-child(1) { top: 16%; left: 30%; animation-delay: 0s; }
+.sparkles span:nth-child(2) { top: 24%; left: 66%; animation-delay: 1.1s; width: 11px; height: 11px; }
+.sparkles span:nth-child(3) { top: 9%;  left: 50%; animation-delay: 2.2s; width: 12px; height: 12px; }
+.sparkles span:nth-child(4) { top: 40%; left: 22%; animation-delay: 1.6s; width: 10px; height: 10px; }
+.sparkles span:nth-child(5) { top: 46%; left: 78%; animation-delay: 0.6s; }
+.sparkles span:nth-child(6) { top: 62%; left: 38%; animation-delay: 2.8s; width: 9px;  height: 9px; }
+.sparkles span:nth-child(7) { top: 68%; left: 62%; animation-delay: 3.4s; width: 12px; height: 12px; }
+@keyframes sparkle-twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.4) rotate(0deg); }
+  50%      { opacity: 0.85; transform: scale(1) rotate(45deg); }
+}
 .founder-quote__text {
   max-width: 840px; margin-inline: auto;
   font-family: var(--font-display); font-size: clamp(1.6rem, 5vw, 2.4rem);
@@ -378,6 +701,114 @@ body {
   margin-top: var(--space-md);
   font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--c-gold-deep); font-weight: 700;
+}
+
+/* ============================================================
+   3D-СВЕЧИ (чистый CSS)
+   Одна горит (мерцающее пламя + ореол), вторая просто стоит.
+   Объём воска создаёт горизонтальный градиент (иллюзия цилиндра).
+   ============================================================ */
+.candles {
+  display: flex; align-items: flex-end; justify-content: center;
+  gap: var(--space-lg);
+  margin: 0 auto var(--space-xl);
+  min-height: 195px;
+}
+.candle { position: relative; display: flex; flex-direction: column; align-items: center; }
+
+/* Восковое тело */
+.candle__body {
+  position: relative;
+  width: 50px; height: 132px;
+  border-radius: 7px 7px 5px 5px / 13px 13px 5px 5px;
+  background: linear-gradient(90deg,
+    #c2ac82 0%, #ddcaa6 14%, #f7efdc 42%, #fffefb 52%, #efe4cc 72%, #cbb892 90%, #bca680 100%);
+  box-shadow:
+    inset 0 5px 9px rgba(255,255,255,0.55),
+    inset 0 -18px 26px rgba(120,95,55,0.18),
+    0 16px 22px -12px rgba(70,60,40,0.55);
+}
+/* Оплавленный верх (эллипс-ободок) */
+.candle__body::before {
+  content: ""; position: absolute; top: -6px; left: 0; right: 0; height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 35%, #fffefb 0%, #efe0c2 58%, #d6c19a 100%);
+  box-shadow: inset 0 -3px 5px rgba(150,120,70,0.35);
+}
+/* Фитиль */
+.candle__body::after {
+  content: ""; position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+  width: 3px; height: 12px; border-radius: 2px;
+  background: linear-gradient(#2a2018, #6e5c44);
+}
+
+/* Незажжённая свеча: чуть ниже, обугленный фитиль */
+.candle--unlit .candle__body { height: 110px; }
+.candle--unlit .candle__body::after {
+  height: 9px; background: linear-gradient(#15110d, #34281d 65%);
+}
+
+/* Пламя */
+.candle__flame {
+  position: absolute; left: 50%; bottom: calc(100% - 6px);
+  transform: translateX(-50%);
+  width: 19px; height: 46px;
+  background: linear-gradient(to top,
+    #e8821a 0%, #ffb734 28%, #ffe07a 58%, #fff6d4 82%, #ffffff 100%);
+  clip-path: polygon(50% 0%, 68% 20%, 85% 48%, 80% 76%, 60% 95%, 50% 100%, 40% 95%, 20% 76%, 15% 48%, 32% 20%);
+  filter:
+    drop-shadow(0 0 11px rgba(255,178,70,0.9))
+    drop-shadow(0 3px 24px rgba(255,140,35,0.55));
+  transform-origin: 50% 92%;
+  animation: candle-flicker 1.7s ease-in-out infinite alternate;
+  z-index: 2;
+}
+/* Яркое ядро пламени */
+.candle__flame::after {
+  content: ""; position: absolute; left: 50%; bottom: 3px; transform: translateX(-50%);
+  width: 7px; height: 27px; border-radius: 50%;
+  background: linear-gradient(to top, #ffcf52, #fff3cf 70%, #fff);
+}
+/* Тёплый ореол света вокруг горящей свечи */
+.candle--lit::before {
+  content: ""; position: absolute; left: 50%; top: -34px; transform: translateX(-50%);
+  width: 150px; height: 170px; border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 58%,
+    rgba(255,184,86,0.30) 0%, rgba(255,160,55,0.12) 38%, rgba(255,150,40,0) 70%);
+  pointer-events: none; z-index: 0;
+  animation: candle-glow 1.7s ease-in-out infinite alternate;
+}
+
+/* Дымок незажжённой свечи */
+.candle__smoke {
+  position: absolute; left: 50%; bottom: calc(100% - 4px); transform: translateX(-50%);
+  width: 5px; height: 34px; border-radius: 50%;
+  background: linear-gradient(to top, rgba(140,140,140,0), rgba(150,150,150,0.16) 30%, rgba(150,150,150,0));
+  filter: blur(2px); pointer-events: none;
+  animation: candle-smoke 4.5s ease-in-out infinite;
+}
+
+@keyframes candle-flicker {
+  0%   { transform: translateX(-50%) scale(1, 1)       rotate(0deg); }
+  25%  { transform: translateX(-51%) scale(0.97, 1.05) rotate(-1.2deg); }
+  50%  { transform: translateX(-49%) scale(1.03, 0.97) rotate(1deg); }
+  75%  { transform: translateX(-50%) scale(0.98, 1.04) rotate(-0.6deg); }
+  100% { transform: translateX(-50%) scale(1.02, 0.99) rotate(0.6deg); }
+}
+@keyframes candle-glow {
+  from { opacity: 0.75; transform: translateX(-50%) scale(1); }
+  to   { opacity: 1;    transform: translateX(-50%) scale(1.07); }
+}
+@keyframes candle-smoke {
+  0%   { opacity: 0; transform: translateX(-50%) translateY(8px) scaleX(1); }
+  30%  { opacity: 0.7; }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-16px) scaleX(1.7) skewX(10deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .candle__flame, .candle--lit::before, .candle__smoke,
+  .sigil-spin, .sparkles span, .sun-spin,
+  .starfield span, .specialist-card__play-icon::before { animation: none; }
+  .hero__particles, .sparkles, .starfield { display: none; }
 }
 
 /* ============================================================
@@ -458,12 +889,20 @@ body {
   border-top: 1px solid var(--c-line);
   padding-block: var(--space-lg);
   text-align: center;
+  isolation: isolate; /* для стабильного blend-mode логотипа */
 }
 .site-footer__logo { display: inline-block; margin-bottom: var(--space-md); }
 .site-footer__logo img {
   width: clamp(150px, 42vw, 196px); height: auto; margin-inline: auto;
+  mix-blend-mode: darken; /* убирает белый фон, сливая его с кремовым */
 }
+.messengers--footer { display: flex; justify-content: center; gap: 0.6rem; margin-bottom: var(--space-md); }
+.messengers--footer .messenger-icon img { width: 40px; height: 40px; }
 .site-footer__copy { font-size: 0.85rem; color: var(--c-ink-soft); line-height: 1.6; }
+.site-footer__legal {
+  margin-top: var(--space-sm); font-size: 0.78rem;
+  color: var(--c-ink-soft); opacity: 0.8; line-height: 1.6;
+}
 
 /* ============================================================
    Reveal при скролле
@@ -484,16 +923,19 @@ body {
 
 @media (min-width: 768px) {
   .container { padding-inline: var(--space-xl); }
-  .nav { display: block; }
-  .nav-toggle { display: none; }
-  .mobile-menu { display: none; }
-  .site-header__inner { min-height: 84px; }
-  .brand__logo { height: 54px; }
+  .site-header__inner { min-height: 72px; }
+  .brand__logo { height: 46px; }
+  .brand-banner__logo img { height: 184px; }
   .contact__grid { grid-template-columns: 1.3fr 1fr; }
+  .problems__grid { grid-template-columns: repeat(2, 1fr); align-items: start; }
 }
 
 @media (min-width: 980px) {
-  .masters__grid { grid-template-columns: repeat(3, 1fr); }
+  .nav { display: block; }
+  .nav-toggle { display: none; }
+  .mobile-menu { display: none; }
+  .brand__logo { height: 48px; }
+  .brand-banner__logo img { height: 212px; }
   .services__grid { grid-template-columns: repeat(3, 1fr); }
   .specialists__grid {
     grid-template-columns: repeat(4, 1fr);
