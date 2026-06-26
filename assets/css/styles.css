@@ -153,7 +153,7 @@ body {
 }
 .brand-banner__logo { display: inline-block; flex-shrink: 0; line-height: 0; }
 .brand-banner__logo img {
-  height: 132px; width: auto; display: block;
+  height: 172px; width: auto; display: block;
   mix-blend-mode: darken; /* убирает белый фон, сливая его с кремовым */
 }
 /* Декоративные золотые линии по бокам */
@@ -925,7 +925,7 @@ body {
   .container { padding-inline: var(--space-xl); }
   .site-header__inner { min-height: 72px; }
   .brand__logo { height: 46px; }
-  .brand-banner__logo img { height: 184px; }
+  .brand-banner__logo img { height: 232px; }
   .contact__grid { grid-template-columns: 1.3fr 1fr; }
   .problems__grid { grid-template-columns: repeat(2, 1fr); align-items: start; }
 }
@@ -935,10 +935,295 @@ body {
   .nav-toggle { display: none; }
   .mobile-menu { display: none; }
   .brand__logo { height: 48px; }
-  .brand-banner__logo img { height: 212px; }
+  .brand-banner__logo img { height: 268px; }
   .services__grid { grid-template-columns: repeat(3, 1fr); }
   .specialists__grid {
     grid-template-columns: repeat(4, 1fr);
     max-width: var(--container);
   }
+}
+
+/* ============================================================
+   ЛЕНТА ДОВЕРИЯ
+   ============================================================ */
+.trust-strip {
+  padding-block: var(--space-lg);
+  border-block: 1px solid var(--c-line);
+  background: var(--c-bg-soft);
+}
+.trust-strip__inner {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg) var(--space-sm); text-align: center;
+}
+.trust-badge { padding-inline: var(--space-xs); }
+.trust-badge__num {
+  display: block; font-family: var(--font-display);
+  font-size: clamp(1.5rem, 5vw, 2rem); font-weight: 700;
+  color: var(--c-gold); line-height: 1.1;
+}
+.trust-badge__label {
+  display: block; margin-top: 0.35rem;
+  font-size: 0.95rem; color: var(--c-ink-soft); line-height: 1.4;
+}
+
+/* ============================================================
+   КВИЗ «ЧТО ВАС БЕСПОКОИТ»
+   ============================================================ */
+.quiz__grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm); max-width: 760px; margin-inline: auto;
+}
+.quiz-option {
+  display: flex; flex-direction: column; align-items: center; gap: 0.65rem;
+  padding: 1.5rem 1rem; min-height: 7rem; text-align: center; cursor: pointer;
+  background: var(--c-surface); border: 1px solid var(--c-line);
+  border-radius: var(--radius);
+  transition: border-color var(--dur) var(--ease),
+              transform var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease);
+}
+.quiz-option:hover, .quiz-option:focus-visible {
+  border-color: var(--c-gold); transform: translateY(-3px); box-shadow: var(--shadow-soft);
+}
+.quiz-option__icon { font-size: 1.9rem; color: var(--c-gold); line-height: 1; }
+.quiz-option__label {
+  font-family: var(--font-display); font-size: 1.2rem; color: var(--c-heading);
+}
+.quiz__urgency {
+  margin-top: var(--space-lg); text-align: center;
+  font-size: 1.05rem; color: var(--c-ink-soft);
+  display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+}
+.quiz__urgency strong { color: var(--c-gold-deep); }
+.quiz__urgency-dot {
+  flex-shrink: 0; width: 9px; height: 9px; border-radius: 50%;
+  background: #cf6a4a; animation: pulse-dot 2s infinite;
+}
+@keyframes pulse-dot {
+  0%   { box-shadow: 0 0 0 0 rgba(207,106,74,0.5); }
+  70%  { box-shadow: 0 0 0 9px rgba(207,106,74,0); }
+  100% { box-shadow: 0 0 0 0 rgba(207,106,74,0); }
+}
+
+/* ============================================================
+   КАК ПРОХОДИТ ПРИЁМ (ШАГИ)
+   ============================================================ */
+.steps__list {
+  list-style: none; display: grid; grid-template-columns: 1fr;
+  gap: var(--space-md); max-width: var(--measure); margin-inline: auto;
+}
+.step {
+  position: relative;
+  padding: var(--space-md) var(--space-md) var(--space-md) 4.75rem;
+  background: var(--c-surface); border: 1px solid var(--c-line);
+  border-radius: var(--radius);
+}
+.step__num {
+  position: absolute; left: var(--space-md); top: var(--space-md);
+  width: 2.7rem; height: 2.7rem;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 1.35rem; font-weight: 700;
+  color: #fff; background: var(--c-gold); border-radius: 50%;
+}
+.step__title {
+  font-family: var(--font-display); font-size: var(--fs-h3); color: var(--c-heading);
+}
+.step__desc {
+  margin-top: 0.4rem; color: var(--c-ink-soft);
+  font-size: var(--fs-body); line-height: 1.65;
+}
+.steps__cta { text-align: center; margin-top: var(--space-xl); }
+
+/* ============================================================
+   ЧАСТЫЕ ВОПРОСЫ (FAQ)
+   ============================================================ */
+.faq__list { max-width: var(--measure); margin-inline: auto; }
+.faq-item {
+  border: 1px solid var(--c-line); border-radius: var(--radius);
+  background: var(--c-surface); margin-bottom: var(--space-sm); overflow: hidden;
+}
+.faq-item__q {
+  list-style: none; cursor: pointer; position: relative;
+  padding: 1.15rem 3.2rem 1.15rem 1.4rem;
+  font-family: var(--font-display); font-size: 1.2rem;
+  color: var(--c-heading); line-height: 1.4;
+}
+.faq-item__q::-webkit-details-marker { display: none; }
+.faq-item__q:hover { color: var(--c-gold-deep); }
+.faq-item__q:focus-visible { outline: 2px solid var(--c-gold); outline-offset: -2px; }
+.faq-item__q::after {
+  content: "+"; position: absolute; right: 1.3rem; top: 50%; transform: translateY(-50%);
+  font-size: 1.7rem; color: var(--c-gold); line-height: 1;
+}
+.faq-item[open] .faq-item__q::after { content: "\2212"; }
+.faq-item__a { padding: 0 1.4rem 1.3rem; }
+.faq-item__a p { color: var(--c-ink-soft); font-size: var(--fs-body); line-height: 1.7; }
+
+@media (prefers-reduced-motion: reduce) {
+  .quiz__urgency-dot { animation: none; }
+}
+
+/* ---- Адаптив для новых блоков ---- */
+@media (min-width: 600px) {
+  .trust-strip__inner { grid-template-columns: repeat(3, 1fr); }
+  .quiz__grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 768px) {
+  .steps__list { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ============================================================
+   3D-ЭЛЕМЕНТЫ — тематика ясновидения и целительства
+   ============================================================ */
+
+/* ---- Хрустальный шар в hero ---- */
+.orb-scene {
+  perspective: 750px;
+  display: flex; justify-content: center;
+  margin-bottom: var(--space-lg);
+}
+.orb {
+  position: relative; width: 158px; height: 158px;
+  transform-style: preserve-3d;
+  animation: orb-float 6s var(--ease) infinite;
+}
+@keyframes orb-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-14px); }
+}
+
+/* Сама стеклянная сфера */
+.orb__ball {
+  position: absolute; inset: 20px; border-radius: 50%; overflow: hidden;
+  background:
+    radial-gradient(circle at 35% 28%, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 24%),
+    radial-gradient(circle at 50% 55%, rgba(216,192,137,0.5) 0%, rgba(191,154,78,0.34) 46%, rgba(107,98,86,0.4) 100%);
+  box-shadow:
+    inset -16px -20px 34px rgba(70,60,40,0.45),
+    inset 12px 14px 30px rgba(255,255,255,0.45),
+    0 22px 34px -14px rgba(70,60,40,0.55);
+}
+.orb__mist {
+  position: absolute; inset: -25%;
+  background:
+    radial-gradient(circle at 30% 70%, rgba(216,192,137,0.75), transparent 46%),
+    radial-gradient(circle at 72% 34%, rgba(255,245,222,0.65), transparent 42%);
+  filter: blur(7px);
+  animation: orb-swirl 9s linear infinite;
+}
+@keyframes orb-swirl { to { transform: rotate(360deg); } }
+.orb__core {
+  position: absolute; inset: 32%; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,248,230,0.95), rgba(216,192,137,0) 70%);
+  animation: orb-pulse 4s ease-in-out infinite;
+}
+@keyframes orb-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(0.85); }
+  50%      { opacity: 1;   transform: scale(1.12); }
+}
+.orb__glare {
+  position: absolute; top: 14%; left: 20%; width: 32%; height: 24%;
+  border-radius: 50%; filter: blur(2px);
+  background: radial-gradient(circle, rgba(255,255,255,0.9), transparent 70%);
+}
+
+/* Искры-блики вокруг шара */
+.orb__spark {
+  position: absolute; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--c-gold-soft);
+  box-shadow: 0 0 9px 2px rgba(216,192,137,0.85);
+  animation: orb-twinkle 3s ease-in-out infinite;
+}
+.orb__spark--1 { top: 4%;  left: 72%; animation-delay: 0s;   }
+.orb__spark--2 { top: 80%; left: 12%; animation-delay: 1s;   }
+.orb__spark--3 { top: 42%; left: 94%; animation-delay: 2s;   }
+@keyframes orb-twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.4); }
+  50%      { opacity: 1; transform: scale(1); }
+}
+
+/* Орбитальные 3D-кольца вокруг шара */
+.orb__ring {
+  position: absolute; inset: 0; border-radius: 50%;
+  border: 1.5px solid rgba(191,154,78,0.55);
+}
+.orb__ring--a { animation: orb-ring-a 7s linear infinite; }
+.orb__ring--b {
+  inset: 10px; border-style: dashed; border-color: rgba(216,192,137,0.5);
+  animation: orb-ring-b 11s linear infinite;
+}
+.orb__ring--c {
+  inset: -12px; border-color: rgba(191,154,78,0.3);
+  animation: orb-ring-c 9s linear infinite reverse;
+}
+@keyframes orb-ring-a {
+  from { transform: rotateX(73deg) rotateZ(0); }
+  to   { transform: rotateX(73deg) rotateZ(360deg); }
+}
+@keyframes orb-ring-b {
+  from { transform: rotateX(72deg) rotateY(28deg) rotateZ(0); }
+  to   { transform: rotateX(72deg) rotateY(28deg) rotateZ(360deg); }
+}
+@keyframes orb-ring-c {
+  from { transform: rotateX(62deg) rotateY(-22deg) rotateZ(0); }
+  to   { transform: rotateX(62deg) rotateY(-22deg) rotateZ(360deg); }
+}
+
+/* Тень-опора под шаром */
+.orb__shadow {
+  position: absolute; left: 50%; bottom: -16px; transform: translateX(-50%);
+  width: 86px; height: 14px; border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(70,60,40,0.4), transparent 70%);
+  animation: orb-shadow 6s var(--ease) infinite;
+}
+@keyframes orb-shadow {
+  0%, 100% { transform: translateX(-50%) scale(1);   opacity: 0.6; }
+  50%      { transform: translateX(-50%) scale(0.8); opacity: 0.4; }
+}
+
+/* ---- 3D-амулет (вращающаяся монета) в разделителе ---- */
+.talisman { perspective: 600px; display: flex; justify-content: center; }
+.talisman__coin {
+  position: relative; width: 58px; height: 58px;
+  transform-style: preserve-3d;
+  animation: coin-spin 7s linear infinite;
+}
+@keyframes coin-spin {
+  from { transform: rotateY(0); }
+  to   { transform: rotateY(360deg); }
+}
+.talisman__face {
+  position: absolute; inset: 0; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.75rem; color: var(--c-gold-deep);
+  background: radial-gradient(circle at 38% 32%, #f5e8c8 0%, #d8c089 38%, #bf9a4e 72%, #a07f37 100%);
+  box-shadow: inset 0 0 0 2px rgba(160,127,55,0.45), inset 0 0 12px rgba(120,90,30,0.4);
+  backface-visibility: hidden;
+}
+.talisman__face--back { transform: rotateY(180deg); }
+.talisman__edge {
+  position: absolute; inset: 0; border-radius: 50%;
+  transform: translateZ(-2px);
+  background: linear-gradient(#a07f37, #7c6024);
+}
+
+/* ---- Интерактивный 3D-наклон карточек ---- */
+.master-card.is-tilt, .service-card.is-tilt {
+  transition: transform 0.12s linear, border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+
+/* ---- Крупнее на десктопе ---- */
+@media (min-width: 768px) {
+  .orb { width: 188px; height: 188px; }
+}
+
+/* ---- Уважаем prefers-reduced-motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .orb, .orb__mist, .orb__core, .orb__spark, .orb__ring,
+  .orb__shadow, .talisman__coin {
+    animation: none;
+  }
+  .orb__ring--a { transform: rotateX(73deg); }
+  .orb__ring--b { transform: rotateX(72deg) rotateY(28deg); }
+  .orb__ring--c { transform: rotateX(62deg) rotateY(-22deg); }
 }

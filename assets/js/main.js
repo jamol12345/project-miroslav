@@ -211,4 +211,62 @@
       }
     });
   }
+
+  /* ---------- Квиз «Что вас беспокоит» → форма заявки ---------- */
+  const quizOptions = document.querySelectorAll(".quiz-option");
+
+  if (quizOptions.length && form) {
+    const messageField = document.getElementById("message");
+    const nameField = document.getElementById("name");
+
+    quizOptions.forEach(function (option) {
+      option.addEventListener("click", function () {
+        const topic = option.getAttribute("data-topic") || "";
+
+        // Подставляем тему в поле вопроса, не затирая уже введённый текст
+        if (messageField) {
+          const prefix = "Тема обращения: " + topic + ". ";
+          messageField.value = /^Тема обращения: /.test(messageField.value)
+            ? prefix
+            : prefix + messageField.value;
+          const wrap = messageField.closest(".form-field");
+          if (wrap) wrap.classList.remove("has-error");
+        }
+
+        // Плавно ведём человека к форме и ставим курсор в первое поле
+        const target = document.getElementById("contact");
+        if (target) {
+          target.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" });
+        }
+        if (nameField) {
+          window.setTimeout(function () { nameField.focus({ preventScroll: true }); }, prefersReducedMotion ? 0 : 500);
+        }
+      });
+    });
+  }
+
+  /* ---------- 3D-наклон карточек при наведении ---------- */
+  const tiltCards = document.querySelectorAll(".master-card, .service-card");
+  const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
+
+  if (tiltCards.length && !prefersReducedMotion && !coarsePointer) {
+    const MAX_TILT = 8; // градусов
+
+    tiltCards.forEach(function (card) {
+      card.addEventListener("mousemove", function (e) {
+        const rect = card.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width - 0.5;
+        const py = (e.clientY - rect.top) / rect.height - 0.5;
+        card.classList.add("is-tilt");
+        card.style.transform =
+          "perspective(900px) rotateY(" + (px * MAX_TILT).toFixed(2) + "deg) " +
+          "rotateX(" + (-py * MAX_TILT).toFixed(2) + "deg) translateZ(8px)";
+      });
+
+      card.addEventListener("mouseleave", function () {
+        card.classList.remove("is-tilt");
+        card.style.transform = "";
+      });
+    });
+  }
 })();
