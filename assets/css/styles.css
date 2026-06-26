@@ -854,6 +854,20 @@ body {
 .form-field.has-error .form-error { display: block; }
 .form-note { margin-top: var(--space-sm); font-size: 0.82rem; color: var(--c-ink-soft); }
 
+/* honeypot против ботов — скрыт от людей, но доступен ботам */
+.form-honeypot {
+  position: absolute !important; left: -9999px !important;
+  width: 1px; height: 1px; opacity: 0; pointer-events: none;
+}
+
+/* Сообщение об ошибке отправки */
+.form-fail {
+  display: none; margin-top: var(--space-sm);
+  font-size: 0.9rem; color: #c0392b; line-height: 1.5;
+}
+.form-fail.is-visible { display: block; }
+.form-fail a { color: #c0392b; text-decoration: underline; }
+
 /* Успешная отправка */
 .form-success {
   display: none; text-align: center; padding: var(--space-lg) var(--space-sm);

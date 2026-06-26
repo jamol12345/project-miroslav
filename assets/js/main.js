@@ -187,6 +187,50 @@
       });
     });
 
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const failNote = document.getElementById("form-fail");
+    const contactInput = document.getElementById("contact-method");
+    const successTitle = success ? success.querySelector(".form-success__title") : null;
+    const successText = success ? success.querySelector(".form-success__text") : null;
+    const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
+    const STORE_KEY = "miroslav_leads"; // уже отправленные контакты (анти-дубль)
+
+    // Нормализуем контакт в ключ: телефон → только цифры (8XXX… → 7XXX…),
+    // телеграм/почта → нижний регистр без пробелов. Так «+7 900…» и «8 900…» = один номер.
+    function contactKey(value) {
+      const v = (value || "").trim();
+      const digits = v.replace(/\D/g, "");
+      if (digits.length >= 10) {
+        let d = digits;
+        if (d.length === 11 && d.charAt(0) === "8") d = "7" + d.slice(1);
+        return "tel:" + d;
+      }
+      return v ? "id:" + v.toLowerCase().replace(/\s+/g, "") : "";
+    }
+    function loadKeys() {
+      try { return JSON.parse(window.localStorage.getItem(STORE_KEY)) || []; }
+      catch (err) { return []; }
+    }
+    function rememberKey(key) {
+      if (!key) return;
+      try {
+        const keys = loadKeys();
+        if (keys.indexOf(key) === -1) {
+          keys.push(key);
+          window.localStorage.setItem(STORE_KEY, JSON.stringify(keys));
+        }
+      } catch (err) { /* localStorage недоступен — просто пропускаем */ }
+    }
+    function showSuccess(title, text) {
+      form.style.display = "none";
+      if (success) {
+        if (title && successTitle) successTitle.textContent = title;
+        if (text && successText) successText.textContent = text;
+        success.classList.add("is-active");
+        success.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "center" });
+      }
+    }
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       let valid = true;
@@ -202,13 +246,37 @@
         return;
       }
 
-      // Прототип: бэкенда нет — показываем экран успеха.
-      // На проде здесь будет fetch() на endpoint / Telegram-уведомление.
-      form.style.display = "none";
-      if (success) {
-        success.classList.add("is-active");
-        success.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "center" });
+      // Анти-дубль: одна заявка с одного номера/контакта
+      const key = contactKey(contactInput ? contactInput.value : "");
+      if (key && loadKeys().indexOf(key) !== -1) {
+        showSuccess(
+          "Заявка уже принята",
+          "Вы уже оставляли заявку с этими контактами — мастер свяжется с вами в ближайшее время."
+        );
+        return;
       }
+
+      // Прячем прежнюю ошибку, блокируем кнопку
+      if (failNote) failNote.classList.remove("is-visible");
+      const btnLabel = submitBtn ? submitBtn.textContent : "";
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Отправляем…"; }
+
+      // Отправляем заявку на почту через Web3Forms
+      fetch(WEB3FORMS_ENDPOINT, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(form),
+      })
+        .then(function (response) { return response.json(); })
+        .then(function (data) {
+          if (!data.success) throw new Error(data.message || "Ошибка отправки");
+          rememberKey(key); // запоминаем номер, чтобы не дублировать
+          showSuccess();
+        })
+        .catch(function () {
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = btnLabel; }
+          if (failNote) failNote.classList.add("is-visible");
+        });
     });
   }
 
