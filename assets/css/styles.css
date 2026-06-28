@@ -58,30 +58,6 @@ body {
   display: flex; align-items: center; justify-content: center;
   color: var(--c-gold); font-size: 1rem; line-height: 1; user-select: none;
 }
-.rule-star { display: flex; align-items: center; gap: var(--space-md); color: var(--c-gold); }
-.rule-star::before, .rule-star::after {
-  content: ""; flex: 1; height: 1px; background: var(--c-line);
-}
-.rule-star span { font-size: 0.85rem; line-height: 1; }
-
-/* Орнамент: золотая окружность со звездой (как в шаблоне) */
-.star-orb {
-  position: relative;
-  width: 84px; height: 84px;
-  margin: var(--space-lg) auto 0;
-  border-radius: 50%;
-  border: 1px solid var(--c-gold-soft);
-  display: grid; place-items: center;
-}
-.star-orb::before {
-  content: "";
-  position: absolute; inset: 9px;
-  border-radius: 50%;
-  border: 1px dashed var(--c-gold-soft);
-  opacity: 0.7;
-}
-.star-orb span { color: var(--c-gold); font-size: 1.1rem; line-height: 1; }
-
 /* Орнамент-разделитель: фазы луны */
 .moon-divider {
   position: relative;
@@ -198,16 +174,6 @@ body {
   transition: transform 0.3s var(--ease);
 }
 .messenger-icon:hover img { transform: translateY(-2px) scale(1.06); }
-.brand__mark {
-  display: grid; place-items: center;
-  width: 38px; height: 38px; border-radius: 50%;
-  border: 1px solid var(--c-gold); color: var(--c-gold-deep);
-  font-family: var(--font-display); font-size: 0.95rem;
-}
-.brand__name {
-  font-family: var(--font-display); font-size: 1.0625rem;
-  color: var(--c-heading); letter-spacing: 0.01em;
-}
 .nav { display: none; }
 .nav__list { display: flex; align-items: center; gap: var(--space-md); }
 .nav__link {
