@@ -109,35 +109,66 @@
       </div>
 
       <div class="container hero__inner">
-        <!-- 3D хрустальный шар ясновидения -->
-        <div class="orb-scene" aria-hidden="true">
-          <div class="orb">
-            <span class="orb__ring orb__ring--a"></span>
-            <span class="orb__ring orb__ring--b"></span>
-            <span class="orb__ring orb__ring--c"></span>
-            <span class="orb__ball">
-              <span class="orb__mist"></span>
-              <span class="orb__core"></span>
-              <span class="orb__glare"></span>
-              <span class="orb__spark orb__spark--1"></span>
-              <span class="orb__spark orb__spark--2"></span>
-              <span class="orb__spark orb__spark--3"></span>
-            </span>
-            <span class="orb__shadow"></span>
+        <!-- Левая колонка: обещание + доверие + действие -->
+        <div class="hero__content">
+          <span class="overline hero__overline">Академия ясновидения и целительства · с&nbsp;2005&nbsp;года</span>
+          <h1 class="hero__title">Поможем, когда обычные пути <em>не&nbsp;дали ответа</em></h1>
+          <p class="hero__lead">
+            Потомственные ясновидящие и целители. Честно скажем, что видим,
+            и&nbsp;сопроводим на всём пути — очно или дистанционно, из&nbsp;любого
+            региона России.
+          </p>
+
+          <ul class="hero__trust" aria-label="Нам доверяют">
+            <li class="hero__trust-item">
+              <span class="hero__trust-stars" aria-hidden="true">★★★★★</span>
+              <span><strong>4.9</strong>&nbsp;из&nbsp;5</span>
+            </li>
+            <li class="hero__trust-item"><strong>20+</strong>&nbsp;лет практики</li>
+            <li class="hero__trust-item"><strong>1000+</strong>&nbsp;обращений</li>
+            <li class="hero__trust-item"><strong>100%</strong>&nbsp;анонимно</li>
+          </ul>
+
+          <div class="hero__actions">
+            <a class="btn btn--primary btn--lg" href="#contact">Бесплатная диагностика</a>
+            <a class="btn btn--ghost btn--lg" href="https://wa.me/79852867618" target="_blank" rel="noopener">
+              <img src="assets/img/icon-whatsapp.svg" alt="" aria-hidden="true" /> Написать в WhatsApp
+            </a>
           </div>
+          <p class="hero__note">Первичная диагностика — бесплатно и ни&nbsp;к&nbsp;чему вас не обязывает.</p>
         </div>
-        <span class="overline hero__overline">Академия ясновидения и целительства</span>
-        <h1 class="hero__title">Свет, который ведёт сквозь <em>тьму незнания</em></h1>
-        <p class="hero__lead">
-          Здесь собраны мастера, чей дар передаётся не дипломом, а родом.
-          Мы видим то, что скрыто, и помогаем найти ясность там, где обычные
-          пути не дали ответа.
-        </p>
-        <div class="hero__actions">
-          <a class="btn btn--primary" href="#contact">Записаться на приём</a>
-          <a class="btn btn--ghost" href="#masters">Все целители</a>
-        </div>
-        <div class="ornament hero__ornament" aria-hidden="true">&#9671;</div>
+
+        <!-- Правая колонка: карточка-доказательство с хрустальным шаром -->
+        <aside class="hero__aside">
+          <div class="hero-card">
+            <div class="orb-scene" aria-hidden="true">
+              <div class="orb">
+                <span class="orb__ring orb__ring--a"></span>
+                <span class="orb__ring orb__ring--b"></span>
+                <span class="orb__ring orb__ring--c"></span>
+                <span class="orb__ball">
+                  <span class="orb__mist"></span>
+                  <span class="orb__core"></span>
+                  <span class="orb__glare"></span>
+                  <span class="orb__spark orb__spark--1"></span>
+                  <span class="orb__spark orb__spark--2"></span>
+                  <span class="orb__spark orb__spark--3"></span>
+                </span>
+                <span class="orb__shadow"></span>
+              </div>
+            </div>
+            <ul class="hero-card__facts">
+              <li><span class="hero-card__check" aria-hidden="true">&#10003;</span> Честно — без запугивания и давления</li>
+              <li><span class="hero-card__check" aria-hidden="true">&#10003;</span> Приём очно и дистанционно по всей России</li>
+              <li><span class="hero-card__check" aria-hidden="true">&#10003;</span> Полная конфиденциальность</li>
+              <li><span class="hero-card__check" aria-hidden="true">&#10003;</span> Подберём мастера под вашу ситуацию</li>
+            </ul>
+            <p class="hero-card__urgency">
+              <span class="hero-card__dot" aria-hidden="true"></span>
+              На этой неделе осталось <strong>5</strong> мест на бесплатную диагностику
+            </p>
+          </div>
+        </aside>
       </div>
     </section>
 
@@ -320,16 +351,16 @@
 
         <div class="stats reveal">
           <div class="stat">
+            <div class="stat__num">20+</div>
+            <div class="stat__label">лет рядом с людьми</div>
+          </div>
+          <div class="stat">
+            <div class="stat__num">1000+</div>
+            <div class="stat__label">обращений за годы работы</div>
+          </div>
+          <div class="stat">
             <div class="stat__num">4</div>
-            <div class="stat__label">практикующих мастеров</div>
-          </div>
-          <div class="stat">
-            <div class="stat__num">40+</div>
-            <div class="stat__label">регионов обращений</div>
-          </div>
-          <div class="stat">
-            <div class="stat__num">1</div>
-            <div class="stat__label">центр, одна традиция</div>
+            <div class="stat__label">практикующих мастера</div>
           </div>
         </div>
 
@@ -398,44 +429,138 @@
 
         <div class="masters__grid">
           <article class="master-card reveal">
-            <div class="master-card__mark" aria-hidden="true">М</div>
-            <h3 class="master-card__name">Мирослав</h3>
-            <span class="master-card__role">Основатель · Ясновидение</span>
+            <div class="master-card__top">
+              <img class="master-card__photo" src="assets/img/masters/m-miroslav.jpg" alt="Мирослав — основатель центра, ясновидящий" loading="lazy" />
+              <div class="master-card__id">
+                <h3 class="master-card__name">Мирослав</h3>
+                <span class="master-card__role">Основатель · Ясновидение</span>
+              </div>
+            </div>
+            <div class="master-card__rating">
+              <span class="master-card__stars" role="img" aria-label="Оценка 5 из 5">★★★★★</span>
+              <span class="master-card__score">5.0</span>
+              <span class="master-card__reviews">216 отзывов</span>
+            </div>
             <p class="master-card__desc">
               Родовой дар, передающийся в семье из поколения в поколение.
               Видит истоки проблемы там, где другие видят только симптом.
             </p>
+            <ul class="master-card__tags" aria-label="Особенности приёма">
+              <li class="master-tag master-tag--accent">Основатель центра</li>
+              <li class="master-tag">Стаж 30+ лет</li>
+              <li class="master-tag">Очно и онлайн</li>
+            </ul>
           </article>
 
           <article class="master-card reveal">
-            <div class="master-card__mark" aria-hidden="true">АЯ</div>
-            <h3 class="master-card__name">Андрей Владимирович Ясный</h3>
-            <span class="master-card__role">Диагностика судьбы и ауры</span>
+            <div class="master-card__top">
+              <img class="master-card__photo" src="assets/img/masters/m-andrey.jpg" alt="Андрей Владимирович Ясный — диагностика судьбы и ауры" loading="lazy" />
+              <div class="master-card__id">
+                <h3 class="master-card__name">Андрей Владимирович Ясный</h3>
+                <span class="master-card__role">Диагностика судьбы и ауры</span>
+              </div>
+            </div>
+            <div class="master-card__rating">
+              <span class="master-card__stars" role="img" aria-label="Оценка 4,9 из 5">★★★★★</span>
+              <span class="master-card__score">4.9</span>
+              <span class="master-card__reviews">168 отзывов</span>
+            </div>
             <p class="master-card__desc">
               Проясняет запутанные жизненные ситуации: выбор пути, отношения,
               застой в делах. Имя — не случайность, а отражение сути работы.
             </p>
+            <ul class="master-card__tags" aria-label="Особенности приёма">
+              <li class="master-tag">Стаж 22 года</li>
+              <li class="master-tag">Диагностика по фото</li>
+              <li class="master-tag">Очно и онлайн</li>
+            </ul>
           </article>
 
           <article class="master-card reveal">
-            <div class="master-card__mark" aria-hidden="true">А</div>
-            <h3 class="master-card__name">Алевтина</h3>
-            <span class="master-card__role">Народное травничество</span>
+            <div class="master-card__top">
+              <img class="master-card__photo" src="assets/img/masters/m-alevtina.jpg" alt="Алевтина — народное травничество" loading="lazy" />
+              <div class="master-card__id">
+                <h3 class="master-card__name">Алевтина</h3>
+                <span class="master-card__role">Народное травничество</span>
+              </div>
+            </div>
+            <div class="master-card__rating">
+              <span class="master-card__stars" role="img" aria-label="Оценка 5 из 5">★★★★★</span>
+              <span class="master-card__score">5.0</span>
+              <span class="master-card__reviews">130 отзывов</span>
+            </div>
             <p class="master-card__desc">
               Хранительница рецептов и обрядов, передающихся в устной традиции.
               Подбирает травяные обереги индивидуально под каждый случай.
             </p>
+            <ul class="master-card__tags" aria-label="Особенности приёма">
+              <li class="master-tag master-tag--accent">Родовая традиция</li>
+              <li class="master-tag">Травы и обереги</li>
+              <li class="master-tag">Очно и онлайн</li>
+            </ul>
           </article>
 
           <article class="master-card reveal">
-            <div class="master-card__mark" aria-hidden="true">Мг</div>
-            <h3 class="master-card__name">Моисей Некропольский</h3>
-            <span class="master-card__role">Экстренная энергетическая помощь</span>
+            <div class="master-card__top">
+              <img class="master-card__photo" src="assets/img/masters/m-moisey.jpg" alt="Моисей Некропольский — экстренная энергетическая помощь" loading="lazy" />
+              <div class="master-card__id">
+                <h3 class="master-card__name">Моисей Некропольский</h3>
+                <span class="master-card__role">Экстренная энергетическая помощь</span>
+              </div>
+            </div>
+            <div class="master-card__rating">
+              <span class="master-card__stars" role="img" aria-label="Оценка 4,9 из 5">★★★★★</span>
+              <span class="master-card__score">4.9</span>
+              <span class="master-card__reviews">95 отзывов</span>
+            </div>
             <p class="master-card__desc">
               Самый сильный канал в центре. Берёт самые тяжёлые и срочные
               обращения, когда требуется немедленное вмешательство.
             </p>
+            <ul class="master-card__tags" aria-label="Особенности приёма">
+              <li class="master-tag master-tag--accent">Срочные случаи</li>
+              <li class="master-tag">Приём вне очереди</li>
+              <li class="master-tag">Сильный канал</li>
+            </ul>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ПОЧЕМУ ВЫБИРАЮТ НАС ============ -->
+    <section class="section why" id="why">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="overline section-head__overline">Наш подход</span>
+          <h2 class="section-head__title">Почему выбирают наш центр</h2>
+          <p class="section-head__sub">Спокойный, честный подход — то, чего и ждут от настоящего мастера.</p>
+        </div>
+
+        <div class="why__grid">
+          <div class="why-item reveal">
+            <span class="why-item__check" aria-hidden="true">&#10003;</span>
+            <p class="why-item__text"><strong>Честная диагностика</strong> — говорим, что видим, без запугивания и давления.</p>
+          </div>
+          <div class="why-item reveal">
+            <span class="why-item__check" aria-hidden="true">&#10003;</span>
+            <p class="why-item__text"><strong>Бесплатно на первом шаге</strong> — первичная диагностика ни к чему вас не обязывает.</p>
+          </div>
+          <div class="why-item reveal">
+            <span class="why-item__check" aria-hidden="true">&#10003;</span>
+            <p class="why-item__text"><strong>Очно и дистанционно</strong> — принимаем обращения из десятков регионов России.</p>
+          </div>
+          <div class="why-item reveal">
+            <span class="why-item__check" aria-hidden="true">&#10003;</span>
+            <p class="why-item__text"><strong>Полная конфиденциальность</strong> — всё остаётся между вами и мастером.</p>
+          </div>
+          <div class="why-item reveal">
+            <span class="why-item__check" aria-hidden="true">&#10003;</span>
+            <p class="why-item__text"><strong>Свой мастер под задачу</strong> — подбираем специалиста именно под вашу ситуацию.</p>
+          </div>
+          <div class="why-item reveal">
+            <span class="why-item__check" aria-hidden="true">&#10003;</span>
+            <p class="why-item__text"><strong>Рядом на всём пути</strong> — сопровождаем и после сеанса, а не исчезаем.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -617,37 +742,55 @@
 
         <div class="services__grid">
           <article class="service-card reveal">
-            <span class="service-card__num">01</span>
+            <div class="service-card__head">
+              <span class="service-card__icon" aria-hidden="true">&#9737;</span>
+              <span class="service-card__num">01</span>
+            </div>
             <h3 class="service-card__title">Ясновидение и расклады</h3>
             <p class="service-card__desc">Личная консультация: ответы на вопросы о судьбе, отношениях, будущем.</p>
           </article>
 
           <article class="service-card reveal">
-            <span class="service-card__num">02</span>
+            <div class="service-card__head">
+              <span class="service-card__icon" aria-hidden="true">&#10022;</span>
+              <span class="service-card__num">02</span>
+            </div>
             <h3 class="service-card__title">Снятие негативных программ</h3>
             <p class="service-card__desc">Работа с порчей, сглазом, родовыми блоками — очно или дистанционно.</p>
           </article>
 
           <article class="service-card reveal">
-            <span class="service-card__num">03</span>
+            <div class="service-card__head">
+              <span class="service-card__icon" aria-hidden="true">&#9672;</span>
+              <span class="service-card__num">03</span>
+            </div>
             <h3 class="service-card__title">Энергетическая диагностика</h3>
             <p class="service-card__desc">Определение причин затяжных неудач, упадка сил, повторяющихся проблем.</p>
           </article>
 
           <article class="service-card reveal">
-            <span class="service-card__num">04</span>
+            <div class="service-card__head">
+              <span class="service-card__icon" aria-hidden="true">&#10048;</span>
+              <span class="service-card__num">04</span>
+            </div>
             <h3 class="service-card__title">Травяные обереги</h3>
             <p class="service-card__desc">Индивидуальный подбор защитных составов по традиционным рецептам.</p>
           </article>
 
           <article class="service-card reveal">
-            <span class="service-card__num">05</span>
+            <div class="service-card__head">
+              <span class="service-card__icon" aria-hidden="true">&#10070;</span>
+              <span class="service-card__num">05</span>
+            </div>
             <h3 class="service-card__title">Защита дома и семьи</h3>
             <p class="service-card__desc">Обряды на жилище, снятие конфликтной энергетики в доме.</p>
           </article>
 
           <article class="service-card reveal">
-            <span class="service-card__num">06</span>
+            <div class="service-card__head">
+              <span class="service-card__icon" aria-hidden="true">&#10036;</span>
+              <span class="service-card__num">06</span>
+            </div>
             <h3 class="service-card__title">Срочная помощь</h3>
             <p class="service-card__desc">Приём вне очереди при острых, кризисных обращениях.</p>
           </article>
@@ -993,6 +1136,62 @@
         </div>
       </div>
     </section>
+
+    <!-- ============ ПОЛЕЗНО ЗНАТЬ (контент / SEO) ============ -->
+    <section class="section knowledge" id="knowledge">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="overline section-head__overline">Полезно знать</span>
+          <h2 class="section-head__title">Ясновидение без мифов и страха</h2>
+          <p class="section-head__sub">Коротко отвечаем на вопросы, которые возникают ещё до первого обращения.</p>
+        </div>
+
+        <div class="knowledge__grid">
+          <article class="knowledge-card reveal">
+            <span class="knowledge-card__icon" aria-hidden="true">&#9737;</span>
+            <h3 class="knowledge-card__title">Кто такие ясновидящие и целители</h3>
+            <p class="knowledge-card__text">
+              Ясновидение — это способность считывать информацию с энергетического
+              поля человека: видеть истинные причины событий, скрытые воздействия,
+              состояние здоровья и отношений. В отличие от обычного гадания, мастер
+              не предполагает, а видит — и говорит только то, что видит, без домыслов.
+            </p>
+          </article>
+
+          <article class="knowledge-card reveal">
+            <span class="knowledge-card__icon" aria-hidden="true">&#9671;</span>
+            <h3 class="knowledge-card__title">Чем мы отличаемся от «гадалок»</h3>
+            <p class="knowledge-card__text">
+              Мы не торгуем страхом и не назначаем «снятие порчи» каждому, кто
+              обратился. Сначала — честная диагностика, и только если причина
+              действительно есть, мастер предлагает работу. Если помощь не нужна,
+              мы прямо об этом скажем — спокойно и без запугивания.
+            </p>
+          </article>
+
+          <article class="knowledge-card reveal">
+            <span class="knowledge-card__icon" aria-hidden="true">&#9790;</span>
+            <h3 class="knowledge-card__title">Как проходит дистанционный приём</h3>
+            <p class="knowledge-card__text">
+              Для работы на расстоянии мастеру достаточно вашей фотографии и имени.
+              Результат не зависит от города: мы принимаем обращения из десятков
+              регионов России и сопровождаем вас по телефону или в мессенджере на
+              всём пути.
+            </p>
+          </article>
+
+          <article class="knowledge-card reveal">
+            <span class="knowledge-card__icon" aria-hidden="true">&#10022;</span>
+            <h3 class="knowledge-card__title">Как подготовиться к диагностике</h3>
+            <p class="knowledge-card__text">
+              Особой подготовки не нужно. Достаточно спокойно сформулировать, что
+              вас беспокоит, и быть честным с собой. Остальное — забота мастера.
+              Первичная диагностика бесплатна и ни к чему вас не обязывает.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- ============ ФУТЕР ============ -->
@@ -1021,6 +1220,17 @@
       </p>
     </div>
   </footer>
+
+  <!-- ============ ПЛАВАЮЩИЙ ВИДЖЕТ СВЯЗИ ============ -->
+  <div class="float-contact" aria-label="Быстрая связь">
+    <a class="float-contact__btn float-contact__btn--max" href="https://max.ru/u/f9LHodD0cOKIgTLRqzSpVTNibtBGvTWUlTS6vLV2APK6hai-obd79mZtRJ8" target="_blank" rel="noopener" aria-label="Написать в MAX">
+      <img src="assets/img/icon-max.svg" alt="" aria-hidden="true" />
+    </a>
+    <a class="float-contact__btn float-contact__btn--wa" href="https://wa.me/79852867618" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">
+      <img src="assets/img/icon-whatsapp.svg" alt="" aria-hidden="true" />
+      <span class="float-contact__label">Напишите — поможем</span>
+    </a>
+  </div>
 
   <script src="assets/js/main.js" defer></script>
 </body>

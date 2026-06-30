@@ -337,4 +337,70 @@
       });
     });
   }
+
+  /* ---------- Анимация счётчиков (счёт от нуля при появлении) ---------- */
+  const counters = document.querySelectorAll(".stat__num, .trust-badge__num");
+
+  if (counters.length) {
+    const animItems = [];
+
+    counters.forEach(function (el) {
+      const match = el.textContent.trim().match(/^(\D*)(\d+)(\D*)$/);
+      if (!match) return;
+      const target = parseInt(match[2], 10);
+      if (target > 1900) return; // годы (напр. «с 2005») не анимируем
+      el.dataset.cTarget = target;
+      el.dataset.cPrefix = match[1];
+      el.dataset.cSuffix = match[3];
+      animItems.push(el);
+      if (!prefersReducedMotion) el.textContent = match[1] + "0" + match[3];
+    });
+
+    function runCounter(el) {
+      const target = parseInt(el.dataset.cTarget, 10);
+      const prefix = el.dataset.cPrefix;
+      const suffix = el.dataset.cSuffix;
+      const duration = 1200;
+      let startTs = null;
+      function step(ts) {
+        if (startTs === null) startTs = ts;
+        const t = Math.min(1, (ts - startTs) / duration);
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = prefix + Math.round(target * eased) + suffix;
+        if (t < 1) window.requestAnimationFrame(step);
+      }
+      window.requestAnimationFrame(step);
+    }
+
+    if (animItems.length && !prefersReducedMotion && "IntersectionObserver" in window) {
+      const countObserver = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              runCounter(entry.target);
+              countObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+      animItems.forEach(function (el) { countObserver.observe(el); });
+    }
+  }
+
+  /* ---------- Плавающий виджет связи (появляется после скролла) ---------- */
+  const floatContact = document.querySelector(".float-contact");
+
+  if (floatContact) {
+    let floatPending = false;
+    function updateFloat() {
+      floatContact.classList.toggle("is-visible", window.scrollY > 500);
+    }
+    window.addEventListener("scroll", function () {
+      if (floatPending) return;
+      floatPending = true;
+      window.requestAnimationFrame(function () { updateFloat(); floatPending = false; });
+    }, { passive: true });
+    updateFloat();
+  }
 })();
