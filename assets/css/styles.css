@@ -9,7 +9,13 @@ body {
   font-family: var(--font-body);
   font-size: var(--fs-body);
   color: var(--c-ink);
-  background: var(--c-bg);
+  background:
+    radial-gradient(1200px 640px at 50% -10%, rgba(217, 180, 95, 0.11), transparent 60%),
+    radial-gradient(1000px 780px at 108% 106%, rgba(150, 96, 34, 0.10), transparent 62%),
+    var(--c-bg);
+  background-repeat: no-repeat;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 .container {
@@ -29,7 +35,18 @@ body {
   text-align: center;
   margin-bottom: var(--space-xl);
 }
-.section-head__overline { display: block; margin-bottom: var(--space-md); }
+.section-head__overline {
+  display: inline-flex; align-items: center; gap: 0.85rem;
+  margin-bottom: var(--space-md);
+}
+.section-head__overline::before,
+.section-head__overline::after {
+  content: ""; flex: none; width: clamp(22px, 6vw, 52px); height: 1px;
+  background: linear-gradient(to right, transparent, var(--c-gold-soft));
+}
+.section-head__overline::after {
+  background: linear-gradient(to left, transparent, var(--c-gold-soft));
+}
 .section-head__title {
   font-family: var(--font-display);
   font-size: var(--fs-h2);
@@ -94,22 +111,40 @@ body {
 
 /* ---------- Кнопки ---------- */
 .btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 0.5em;
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.55em;
   padding: 0.95em 2em;
   font-family: var(--font-body);
-  font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase;
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase;
+  white-space: nowrap;
   border-radius: var(--radius-sm);
   transition: background-color var(--dur) var(--ease),
               color var(--dur) var(--ease),
-              border-color var(--dur) var(--ease);
+              border-color var(--dur) var(--ease),
+              transform 0.35s var(--ease),
+              box-shadow 0.45s var(--ease);
 }
-.btn--primary { color: var(--c-ink); border: 1px solid var(--c-gold); }
-.btn--primary:hover { background: var(--c-gold); color: #fff; }
-.btn--ghost { color: var(--c-ink-soft); border: 1px solid var(--c-line); }
-.btn--ghost:hover { border-color: var(--c-gold); color: var(--c-ink); }
+.btn--primary {
+  color: #2a1c08; background: var(--grad-gold);
+  border: 1px solid rgba(255, 240, 200, 0.55); font-weight: 700;
+  box-shadow: 0 12px 28px -12px rgba(217, 180, 95, 0.6),
+              inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+.btn--primary:hover {
+  color: #2a1c08; transform: translateY(-2px);
+  box-shadow: 0 18px 38px -12px rgba(217, 180, 95, 0.8),
+              inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+.btn--ghost {
+  color: var(--c-gold-soft); border: 1px solid rgba(228, 198, 138, 0.42);
+  background: rgba(228, 198, 138, 0.03);
+}
+.btn--ghost:hover {
+  border-color: var(--c-gold); color: #fff; background: rgba(228, 198, 138, 0.10);
+  box-shadow: var(--glow-gold);
+}
 .btn--block { width: 100%; }
-.btn--lg { padding: 1.15em 2.3em; font-size: 0.9rem; }
-.btn img { width: 1.35em; height: 1.35em; border-radius: 5px; }
+.btn--lg { padding: 1.15em 2.3em; font-size: 0.86rem; }
+.btn img { width: 1.3em; height: 1.3em; border-radius: 5px; }
 
 /* ============================================================
    ШАПКА
@@ -164,7 +199,7 @@ body {
 
 /* Правый кластер шапки: навигация + мессенджеры + бургер */
 .site-header__right {
-  display: flex; align-items: center; gap: var(--space-md);
+  display: flex; align-items: center; gap: var(--space-sm);
 }
 
 /* Иконки мессенджеров (WhatsApp / MAX) */
@@ -177,9 +212,10 @@ body {
 }
 .messenger-icon:hover img { transform: translateY(-2px) scale(1.06); }
 .nav { display: none; }
-.nav__list { display: flex; align-items: center; gap: var(--space-md); }
+.nav__list { display: flex; align-items: center; gap: 1.15rem; }
 .nav__link {
-  font-size: 0.9rem; color: var(--c-ink-soft); letter-spacing: 0.02em;
+  font-size: 0.82rem; color: var(--c-ink-soft); letter-spacing: 0.02em;
+  white-space: nowrap;
   position: relative; padding-block: 0.25rem; transition: color 0.3s var(--ease);
 }
 .nav__link::after {
@@ -222,9 +258,9 @@ body {
    ============================================================ */
 .hero { position: relative; text-align: left; padding-block: clamp(2.5rem, 7vw, 4.5rem); overflow: hidden; }
 .hero::before {
-  content: ""; position: absolute; top: 38%; left: 50%;
-  width: min(620px, 90vw); height: 360px; transform: translate(-50%, -50%);
-  background: radial-gradient(ellipse at center, rgba(191,154,78,0.10) 0%, rgba(191,154,78,0) 70%);
+  content: ""; position: absolute; top: 30%; left: 62%;
+  width: min(680px, 92vw); height: 480px; transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center, rgba(217, 180, 95, 0.20) 0%, rgba(217, 180, 95, 0) 70%);
   pointer-events: none;
 }
 /* Арканный круг-сигил */
@@ -232,7 +268,7 @@ body {
   position: absolute; top: 42%; left: 50%;
   width: min(560px, 92vw); aspect-ratio: 1;
   transform: translate(-50%, -50%);
-  color: var(--c-gold); opacity: 0.18;
+  color: var(--c-gold); opacity: 0.28;
   pointer-events: none; z-index: 0;
 }
 .hero__sigil svg { width: 100%; height: 100%; display: block; }
@@ -276,10 +312,16 @@ body {
 .hero__overline { display: block; margin-bottom: var(--space-md); }
 .hero__title {
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 6.5vw, 3.5rem); font-weight: 700;
-  color: var(--c-heading); line-height: 1.12; letter-spacing: -0.01em;
+  font-size: clamp(2.4rem, 7vw, 3.9rem); font-weight: 700;
+  color: var(--c-heading); line-height: 1.1; letter-spacing: -0.01em;
 }
-.hero__title em { font-style: normal; color: var(--c-gold); }
+.hero__title em {
+  font-style: normal;
+  background: var(--grad-gold-text);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--c-gold-soft);
+}
 .hero__lead {
   margin-top: var(--space-md); max-width: 34rem;
   font-size: var(--fs-lead); color: var(--c-ink-soft); line-height: 1.65;
@@ -393,10 +435,11 @@ body {
    ============================================================ */
 .masters { background: var(--c-bg-soft); }
 .masters__grid {
-  display: grid; gap: var(--space-lg);
-  grid-template-columns: 1fr;
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: var(--space-lg);
   max-width: 820px; margin-inline: auto;
 }
+.masters__grid .master-card { flex: 0 1 100%; }
 .master-card {
   background: var(--c-surface); border: 1px solid var(--c-line);
   border-radius: var(--radius); padding: clamp(1.75rem, 4vw, 2.85rem);
@@ -474,18 +517,17 @@ body {
   display: grid; place-items: center;
   width: 64px; height: 64px;
   border-radius: 50%;
-  background: rgba(250, 248, 243, 0.92);
-  border: 1px solid var(--c-gold);
-  color: var(--c-gold-deep);
+  background: var(--grad-gold);
+  border: 1px solid rgba(255, 240, 200, 0.5);
+  color: #2a1c08;
   font-size: 1.1rem; line-height: 1;
   padding-left: 4px; /* оптическая центровка треугольника */
-  box-shadow: var(--shadow-soft);
-  transition: transform 0.35s var(--ease), background-color 0.35s var(--ease), color 0.35s var(--ease);
+  box-shadow: 0 10px 24px -8px rgba(217, 180, 95, 0.6);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
 }
 .specialist-card__play:hover .specialist-card__play-icon {
-  transform: scale(1.06);
-  background: var(--c-gold);
-  color: #fff;
+  transform: scale(1.08);
+  box-shadow: 0 14px 30px -8px rgba(217, 180, 95, 0.8);
 }
 .specialist-card.is-playing .specialist-card__play {
   opacity: 0; visibility: hidden;
@@ -599,7 +641,7 @@ body {
   box-shadow: var(--shadow-card);
   transition: background-color 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease);
 }
-.reviews-nav:hover { background: var(--c-gold); color: #fff; border-color: var(--c-gold); }
+.reviews-nav:hover { background: var(--grad-gold); color: #2a1c08; border-color: transparent; }
 .reviews-nav--prev { left: -18px; }
 .reviews-nav--next { right: -18px; }
 
@@ -638,18 +680,21 @@ body {
   margin-bottom: var(--space-md);
 }
 .service-card__icon {
-  display: inline-grid; place-items: center; width: 48px; height: 48px;
-  border-radius: 50%; border: 1px solid var(--c-gold-soft);
-  background: rgba(191, 154, 78, 0.06);
-  color: var(--c-gold); font-size: 1.25rem; line-height: 1;
-  transition: background 0.4s var(--ease), border-color 0.4s var(--ease);
+  display: inline-grid; place-items: center; width: 62px; height: 62px;
+  border-radius: 50%; border: 1px solid rgba(232, 207, 148, 0.35);
+  background: radial-gradient(circle at 50% 36%, rgba(217, 180, 95, 0.20), rgba(0, 0, 0, 0.34));
+  color: var(--c-gold-soft); font-size: 1.7rem; line-height: 1;
+  box-shadow: inset 0 1px 0 rgba(255, 240, 200, 0.18), 0 10px 22px -12px rgba(0, 0, 0, 0.85);
+  text-shadow: 0 0 16px rgba(217, 180, 95, 0.6);
+  transition: background 0.4s var(--ease), border-color 0.4s var(--ease), transform 0.4s var(--ease);
 }
 .service-card:hover .service-card__icon {
-  background: rgba(191, 154, 78, 0.14); border-color: var(--c-gold);
+  border-color: var(--c-gold); transform: translateY(-2px);
+  background: radial-gradient(circle at 50% 36%, rgba(217, 180, 95, 0.32), rgba(0, 0, 0, 0.28));
 }
 .service-card__num {
-  font-family: var(--font-display); font-size: 1.7rem; font-weight: 700;
-  letter-spacing: 0.04em; color: var(--c-gold-soft); line-height: 1;
+  font-family: var(--font-display); font-size: 1.25rem; font-weight: 700;
+  letter-spacing: 0.04em; color: rgba(232, 207, 148, 0.34); line-height: 1;
 }
 .service-card__title {
   font-family: var(--font-display);
@@ -681,7 +726,7 @@ body {
 .master-card:hover,
 .service-card:hover,
 .problem-card:hover {
-  box-shadow: var(--shadow-card), 0 0 30px -8px rgba(191, 154, 78, 0.38);
+  box-shadow: var(--shadow-card), 0 0 34px -6px rgba(217, 180, 95, 0.32);
 }
 .problem-card__head {
   display: flex; align-items: baseline; gap: 0.7rem;
@@ -878,14 +923,17 @@ body {
 .form-field input,
 .form-field textarea {
   width: 100%; font: inherit; color: var(--c-ink);
-  background: var(--c-bg); border: 1px solid var(--c-line);
+  background: rgba(0, 0, 0, 0.30); border: 1px solid rgba(228, 198, 138, 0.22);
   border-radius: var(--radius-sm); padding: 0.85em 1em;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
   transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
+.form-field input::placeholder,
+.form-field textarea::placeholder { color: rgba(169, 157, 134, 0.55); }
 .form-field input:focus,
 .form-field textarea:focus {
   outline: none; border-color: var(--c-gold);
-  box-shadow: 0 0 0 3px rgba(191, 154, 78, 0.14);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 3px rgba(217, 180, 95, 0.16);
 }
 .form-field textarea { resize: vertical; min-height: 120px; }
 .form-error {
@@ -947,10 +995,11 @@ body {
   text-align: center;
   isolation: isolate; /* для стабильного blend-mode логотипа */
 }
-.site-footer__logo { display: inline-block; margin-bottom: var(--space-md); }
+.site-footer__logo { display: inline-block; line-height: 0; margin-bottom: var(--space-md); }
 .site-footer__logo img {
-  width: clamp(150px, 42vw, 196px); height: auto; margin-inline: auto;
-  mix-blend-mode: darken; /* убирает белый фон, сливая его с кремовым */
+  width: clamp(190px, 44vw, 250px); height: auto;
+  border-radius: 16px; border: 1px solid rgba(228, 198, 138, 0.14);
+  box-shadow: 0 20px 44px -24px rgba(0, 0, 0, 0.75);
 }
 .messengers--footer { display: flex; justify-content: center; gap: 0.6rem; margin-bottom: var(--space-md); }
 .messengers--footer .messenger-icon img { width: 40px; height: 40px; }
@@ -973,7 +1022,7 @@ body {
    ПЛАНШЕТ / ДЕСКТОП
    ============================================================ */
 @media (min-width: 600px) {
-  .masters__grid { grid-template-columns: repeat(2, 1fr); }
+  .masters__grid .master-card { flex-basis: calc(50% - var(--space-lg) / 2); }
   .services__grid { grid-template-columns: repeat(2, 1fr); }
 }
 
@@ -1079,7 +1128,8 @@ body {
   width: 2.7rem; height: 2.7rem;
   display: flex; align-items: center; justify-content: center;
   font-family: var(--font-display); font-size: 1.35rem; font-weight: 700;
-  color: #fff; background: var(--c-gold); border-radius: 50%;
+  color: #2a1c08; background: var(--grad-gold); border-radius: 50%;
+  box-shadow: 0 8px 18px -8px rgba(217, 180, 95, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.45);
 }
 .step__title {
   font-family: var(--font-display); font-size: var(--fs-h3); color: var(--c-heading);
@@ -1403,7 +1453,7 @@ body {
 .float-contact__label {
   position: absolute; right: calc(100% + 0.6rem); top: 50%;
   transform: translateY(-50%) translateX(8px);
-  white-space: nowrap; background: var(--c-heading); color: #fff;
+  white-space: nowrap; background: var(--grad-gold); color: #2a1c08; font-weight: 600;
   font-size: 0.82rem; padding: 0.42rem 0.72rem; border-radius: 999px;
   box-shadow: var(--shadow-soft); opacity: 0; pointer-events: none;
   transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
@@ -1449,4 +1499,215 @@ body {
 .why-item__text strong { color: var(--c-heading); font-weight: 700; }
 @media (min-width: 700px) {
   .why__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ============================================================
+   ТЁМНАЯ ТЕМА «ЧЁРНОЕ ЗОЛОТО» — надстройка
+   Единый градиент карточек + новые компоненты референса:
+   лого-локап, кнопка шапки, портал-портрет, футер-бренд.
+   ============================================================ */
+
+/* Единый мягкий градиент для крупных карточек (объём на тёмном) */
+.master-card, .service-card, .problem-card, .review-card, .contact-form,
+.knowledge-card, .quiz-option, .why-item, .step, .faq-item, .quote-box,
+.portal__card {
+  background: var(--grad-card);
+}
+
+/* Видимый фокус на тёмном фоне (доступность) */
+:focus-visible { outline: 2px solid var(--c-gold); outline-offset: 3px; }
+
+/* Приглушаем фоновый орнамент-солнце под тёмную тему */
+.services__ornament { opacity: 0.14; }
+
+/* ---- Лого-локап (эмблема + название) ---- */
+.brand__mark {
+  flex: none; display: inline-flex; width: 40px; height: 40px;
+  color: var(--c-gold);
+  filter: drop-shadow(0 0 7px rgba(217, 180, 95, 0.45));
+}
+.brand__mark svg { width: 100%; height: 100%; display: block; }
+.brand__text { display: flex; flex-direction: column; line-height: 1.05; }
+.brand__name {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 1.22rem; letter-spacing: 0.2em;
+  background: var(--grad-gold-text);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: var(--c-gold-soft);
+}
+.brand__sub {
+  margin-top: 3px; font-size: 0.53rem; letter-spacing: 0.19em;
+  text-transform: uppercase; color: var(--c-ink-soft);
+}
+
+/* ---- Кнопка в шапке (только десктоп) ---- */
+.header-cta { display: none; padding: 0.72em 1.25em; font-size: 0.68rem; }
+.header-cta img { width: 1.15em; height: 1.15em; }
+
+/* ============================================================
+   ГЕРОЙ-ПОРТАЛ — портрет мастера в сияющей золотой рамке
+   ============================================================ */
+.hero__aside { display: flex; justify-content: center; }
+.portal {
+  display: flex; flex-direction: column; align-items: center;
+  gap: var(--space-md); width: 100%;
+}
+.portal__frame {
+  position: relative; width: min(360px, 82vw); aspect-ratio: 1;
+  display: grid; place-items: center; isolation: isolate;
+}
+/* Тёплый ореол за портретом */
+.portal__glow {
+  position: absolute; inset: -14%; z-index: -1; pointer-events: none;
+  background: radial-gradient(circle at 50% 44%,
+    rgba(217, 180, 95, 0.42) 0%, rgba(217, 180, 95, 0.10) 40%, rgba(217, 180, 95, 0) 68%);
+  filter: blur(4px);
+}
+/* Вращающееся золотое кольцо-сигил */
+.portal__ring {
+  position: absolute; inset: 0; color: var(--c-gold);
+  opacity: 0.6; pointer-events: none;
+}
+.portal__ring svg { width: 100%; height: 100%; display: block; }
+/* Декоративное внутреннее кольцо */
+.portal__frame::before {
+  content: ""; position: absolute; inset: 6%; border-radius: 50%;
+  border: 1px solid rgba(232, 207, 148, 0.32);
+}
+/* Сам портрет */
+.portal__photo {
+  position: relative; width: 80%; aspect-ratio: 1; border-radius: 50%;
+  object-fit: cover; object-position: center 28%;
+  border: 2px solid rgba(232, 207, 148, 0.6);
+  box-shadow:
+    0 0 0 9px rgba(217, 180, 95, 0.06),
+    inset 0 0 46px rgba(0, 0, 0, 0.55),
+    0 28px 56px -20px rgba(0, 0, 0, 0.85);
+  filter: saturate(0.96) contrast(1.04);
+}
+
+/* Карточка-подпись под порталом */
+.portal__card {
+  display: flex; align-items: center; gap: var(--space-sm);
+  width: min(370px, 90%);
+  padding: 0.95rem 1.2rem;
+  border: 1px solid var(--c-line); border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+}
+.portal__card-icon {
+  flex: none; display: grid; place-items: center;
+  width: 46px; height: 46px; border-radius: 50%;
+  border: 1px solid var(--c-gold-soft); color: var(--c-gold);
+  background: rgba(217, 180, 95, 0.08);
+}
+.portal__card-icon svg { width: 24px; height: 24px; }
+.portal__card-name {
+  font-family: var(--font-display); font-size: 1.28rem;
+  color: var(--c-heading); line-height: 1.1;
+}
+.portal__card-role {
+  margin-top: 0.15rem; font-size: 0.8rem;
+  color: var(--c-gold-deep); letter-spacing: 0.01em;
+}
+.portal__card-meta {
+  margin-top: 0.15rem; font-size: 0.8rem; color: var(--c-ink-soft); line-height: 1.35;
+}
+
+/* ---- Футер-бренд (текстовый локап по центру) ---- */
+.site-footer__brand {
+  display: inline-flex; flex-direction: column; align-items: center;
+  gap: 0.55rem; margin-bottom: var(--space-md);
+}
+.brand__mark--lg { width: 56px; height: 56px; }
+.brand__name--lg { font-size: 1.65rem; }
+
+@media (min-width: 980px) {
+  .header-cta { display: inline-flex; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portal__ring .sigil-spin { animation: none; }
+}
+
+/* ============================================================
+   3D-ЗОЛОТЫЕ ИКОНКИ (SVG-градиент + рельеф) + ДЫМ
+   ============================================================ */
+.svg-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+.icon3d {
+  width: 30px; height: 30px; display: block;
+  fill: url(#svgGold);
+  filter: drop-shadow(0 2px 1.5px rgba(0, 0, 0, 0.55))
+          drop-shadow(0 0 6px rgba(217, 180, 95, 0.5));
+}
+.service-card__icon .icon3d { width: 34px; height: 34px; }
+.quiz-option__icon .icon3d { width: 30px; height: 30px; }
+
+/* Квиз-иконки → золотой 3D-медальон, как в услугах */
+.quiz-option__icon {
+  display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%;
+  border: 1px solid rgba(232, 207, 148, 0.35);
+  background: radial-gradient(circle at 50% 36%, rgba(217, 180, 95, 0.20), rgba(0, 0, 0, 0.34));
+  box-shadow: inset 0 1px 0 rgba(255, 240, 200, 0.18), 0 10px 22px -12px rgba(0, 0, 0, 0.85);
+  transition: border-color 0.4s var(--ease), transform 0.4s var(--ease);
+}
+.quiz-option:hover .quiz-option__icon,
+.quiz-option:focus-visible .quiz-option__icon {
+  border-color: var(--c-gold); transform: translateY(-2px);
+}
+
+/* «Живое» золото в услугах — пульс-свечение притягивает взгляд */
+.services__grid .service-card__icon { animation: icon-glow 3.6s ease-in-out infinite; }
+.services__grid .service-card:nth-child(2) .service-card__icon { animation-delay: 0.5s; }
+.services__grid .service-card:nth-child(3) .service-card__icon { animation-delay: 1s; }
+.services__grid .service-card:nth-child(4) .service-card__icon { animation-delay: 1.5s; }
+.services__grid .service-card:nth-child(5) .service-card__icon { animation-delay: 2s; }
+.services__grid .service-card:nth-child(6) .service-card__icon { animation-delay: 2.5s; }
+.services__grid .service-card__icon .icon3d { animation: icon-bob 4.4s var(--ease) infinite; }
+@keyframes icon-glow {
+  0%, 100% { box-shadow: inset 0 1px 0 rgba(255, 240, 200, 0.18), 0 10px 22px -12px rgba(0, 0, 0, 0.85), 0 0 0 0 rgba(217, 180, 95, 0); }
+  50%      { box-shadow: inset 0 1px 0 rgba(255, 240, 200, 0.18), 0 10px 22px -12px rgba(0, 0, 0, 0.85), 0 0 26px -2px rgba(217, 180, 95, 0.6); }
+}
+@keyframes icon-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+
+/* ---- Мистический дым в герое ---- */
+.hero__smoke { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.hero__smoke span {
+  position: absolute; bottom: -90px; width: 150px; height: 270px;
+  border-radius: 46% 46% 40% 40%;
+  background: radial-gradient(ellipse at 50% 92%, rgba(226, 198, 140, 0.16), rgba(226, 198, 140, 0) 70%);
+  filter: blur(20px); opacity: 0; transform-origin: bottom center;
+  animation: smoke-rise 15s ease-in infinite;
+}
+.hero__smoke span:nth-child(1) { left: 6%;   animation-delay: 0s; }
+.hero__smoke span:nth-child(2) { left: 30%;  animation-delay: 6s; width: 120px; }
+.hero__smoke span:nth-child(3) { right: 26%; animation-delay: 3s; }
+.hero__smoke span:nth-child(4) { right: 7%;  animation-delay: 9s; width: 130px; }
+@keyframes smoke-rise {
+  0%   { opacity: 0;    transform: translateY(0) scaleX(0.7) rotate(-4deg); }
+  18%  { opacity: 0.85; }
+  55%  { opacity: 0.5; }
+  100% { opacity: 0;    transform: translateY(-380px) scaleX(1.5) rotate(8deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__smoke { display: none; }
+  .services__grid .service-card__icon,
+  .services__grid .service-card__icon .icon3d { animation: none; }
+}
+
+/* ============================================================
+   КРУПНЫЙ ЛОГОТИП В САМОМ ВЕРХУ (заметный для всех)
+   ============================================================ */
+.logo-hero {
+  display: flex; justify-content: center;
+  padding: clamp(1.4rem, 4vw, 2.6rem) var(--space-md) clamp(0.5rem, 2vw, 1rem);
+  background: radial-gradient(ellipse at 50% 46%, rgba(217, 180, 95, 0.13), transparent 62%);
+}
+.logo-hero__link { display: inline-flex; line-height: 0; }
+.logo-hero__img {
+  height: clamp(240px, 40vw, 460px); width: auto; max-width: 92vw;
+  object-fit: contain; border-radius: 22px;
+  border: 1px solid rgba(228, 198, 138, 0.16);
+  box-shadow: 0 34px 74px -32px rgba(0, 0, 0, 0.82), var(--glow-gold);
 }

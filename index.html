@@ -8,7 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap&subset=cyrillic,cyrillic-ext" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&display=swap&subset=cyrillic,cyrillic-ext" rel="stylesheet" />
 
   <link rel="stylesheet" href="assets/css/reset.css" />
   <link rel="stylesheet" href="assets/css/variables.css" />
@@ -16,22 +16,57 @@
 </head>
 <body>
 
-  <!-- ============ ЛОГОТИП-БАННЕР ============ -->
-  <div class="brand-banner">
-    <div class="container brand-banner__inner">
-      <span class="brand-banner__rule" aria-hidden="true"></span>
-      <a href="#top" class="brand-banner__logo" aria-label="Центр имени Мирослава — наверх">
-        <img src="assets/img/logo.jpg" alt="Центр ясновидения и целительства имени Мирослава" />
-      </a>
-      <span class="brand-banner__rule" aria-hidden="true"></span>
-    </div>
+  <!-- ============ SVG-НАБОР: золотые 3D-иконки (градиент + символы) ============ -->
+  <svg class="svg-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="svgGold" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fdefbe" />
+        <stop offset="0.42" stop-color="#e6c46f" />
+        <stop offset="0.72" stop-color="#c79a3c" />
+        <stop offset="1" stop-color="#9c6a1c" />
+      </linearGradient>
+      <symbol id="ic-heart" viewBox="0 0 48 48"><path d="M24 42C7 30 4 20.5 4 14.4 4 8.9 8.4 5 13.4 5 18 5 21.6 7.7 24 11.6 26.4 7.7 30 5 34.6 5 39.6 5 44 8.9 44 14.4 44 20.5 41 30 24 42Z"/></symbol>
+      <symbol id="ic-sun" viewBox="0 0 48 48"><circle cx="24" cy="24" r="9"/><rect x="22.4" y="1.5" width="3.2" height="8" rx="1.6"/><rect x="22.4" y="38.5" width="3.2" height="8" rx="1.6"/><rect x="1.5" y="22.4" width="8" height="3.2" rx="1.6"/><rect x="38.5" y="22.4" width="8" height="3.2" rx="1.6"/><rect x="22.4" y="1.5" width="3.2" height="8" rx="1.6" transform="rotate(45 24 24)"/><rect x="22.4" y="1.5" width="3.2" height="8" rx="1.6" transform="rotate(-45 24 24)"/><rect x="22.4" y="38.5" width="3.2" height="8" rx="1.6" transform="rotate(45 24 24)"/><rect x="22.4" y="38.5" width="3.2" height="8" rx="1.6" transform="rotate(-45 24 24)"/></symbol>
+      <symbol id="ic-coins" viewBox="0 0 48 48"><ellipse cx="24" cy="34" rx="14" ry="5"/><ellipse cx="24" cy="27" rx="14" ry="5"/><ellipse cx="24" cy="20" rx="14" ry="5"/></symbol>
+      <symbol id="ic-shield" viewBox="0 0 48 48"><path fill-rule="evenodd" d="M24 4 41 9.6V23.5C41 33 33.6 40.6 24 44 14.4 40.6 7 33 7 23.5V9.6ZM24 14 26 22 34 24 26 26 24 34 22 26 14 24 22 22Z"/></symbol>
+      <symbol id="ic-lightning" viewBox="0 0 48 48"><path d="M28 3 11 27H21L19 45 37 20H26L31 3Z"/></symbol>
+      <symbol id="ic-candle" viewBox="0 0 48 48"><rect x="17" y="19" width="14" height="25" rx="3.5"/><path d="M24 3C29.5 9.5 30.5 13.8 27.8 17 26.2 18.9 21.8 18.9 20.2 17 17.5 13.8 18.5 9.5 24 3Z"/></symbol>
+      <symbol id="ic-gem" viewBox="0 0 48 48"><path d="M15 6H33L44 18 24 44 4 18Z"/></symbol>
+      <symbol id="ic-waves" viewBox="0 0 48 48"><circle cx="24" cy="24" r="4"/><path fill-rule="evenodd" d="M24 13A11 11 0 1 1 23.99 13ZM24 16.2A7.8 7.8 0 1 0 24.01 16.2Z"/><path fill-rule="evenodd" d="M24 5A19 19 0 1 1 23.99 5ZM24 8.4A15.6 15.6 0 1 0 24.01 8.4Z"/></symbol>
+      <symbol id="ic-leaf" viewBox="0 0 48 48"><rect x="22.8" y="16" width="2.4" height="28" rx="1.2"/><path d="M24 28C23 18 15 11.5 7.5 9.5 10.5 19.5 16.5 26 24 28Z"/><path d="M24 21C25 12 33 7 40.5 5.5 37.5 15 31 20 24 21Z"/></symbol>
+      <symbol id="ic-eye" viewBox="0 0 48 48"><path fill-rule="evenodd" d="M3 24C11 12.5 37 12.5 45 24 37 35.5 11 35.5 3 24ZM24 16.5A7.5 7.5 0 1 0 24.01 16.5Z"/><circle cx="24" cy="24" r="3.4"/></symbol>
+      <symbol id="ic-sparkle" viewBox="0 0 48 48"><path d="M24 3 27.6 20.4 45 24 27.6 27.6 24 45 20.4 27.6 3 24 20.4 20.4Z"/><path d="M38 6 39.4 10.6 44 12 39.4 13.4 38 18 36.6 13.4 32 12 36.6 10.6Z"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- ============ ЛОГОТИП (крупный, в самом верху) ============ -->
+  <div class="logo-hero">
+    <a href="#top" class="logo-hero__link" aria-label="Академия ясновидения и целительства имени Мирослава — наверх">
+      <img class="logo-hero__img" src="assets/img/logo-akademia.jpg"
+           alt="Академия ясновидения и целительства имени Мирослава" />
+    </a>
   </div>
 
   <!-- ============ ШАПКА (навбар) ============ -->
   <header class="site-header">
     <div class="container site-header__inner">
-      <a href="#top" class="brand" aria-label="Центр имени Мирослава — наверх">
-        <img class="brand__logo" src="assets/img/logo-mark.jpg" alt="" aria-hidden="true" />
+      <a href="#top" class="brand" aria-label="Мирослав — центр эзотерики и целительства, наверх">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="17.5" />
+            <circle cx="20" cy="20" r="11.5" stroke-dasharray="1.4 3.2" />
+            <path d="M20 8 L23 20 L20 32 L17 20 Z" fill="currentColor" stroke="none" />
+            <circle cx="20" cy="20" r="2.4" fill="currentColor" stroke="none" />
+            <circle cx="20" cy="2.5" r="1.3" fill="currentColor" stroke="none" />
+            <circle cx="20" cy="37.5" r="1.3" fill="currentColor" stroke="none" />
+            <circle cx="2.5" cy="20" r="1.3" fill="currentColor" stroke="none" />
+            <circle cx="37.5" cy="20" r="1.3" fill="currentColor" stroke="none" />
+          </svg>
+        </span>
+        <span class="brand__text">
+          <span class="brand__name">MIROSLAV</span>
+          <span class="brand__sub">Академия ясновидения и целительства</span>
+        </span>
       </a>
 
       <div class="site-header__right">
@@ -47,15 +82,9 @@
           </ul>
         </nav>
 
-        <!-- Мессенджеры (ссылки добавим позже) -->
-        <div class="messengers messengers--header" aria-label="Мессенджеры для связи">
-          <a class="messenger-icon" href="https://wa.me/79852867618" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">
-            <img src="assets/img/icon-whatsapp.svg" alt="WhatsApp" />
-          </a>
-          <a class="messenger-icon" href="https://max.ru/u/f9LHodD0cOKIgTLRqzSpVTNibtBGvTWUlTS6vLV2APK6hai-obd79mZtRJ8" target="_blank" rel="noopener" aria-label="Написать в MAX">
-            <img src="assets/img/icon-max.svg" alt="MAX" />
-          </a>
-        </div>
+        <a class="btn btn--ghost header-cta" href="https://wa.me/79852867618" target="_blank" rel="noopener">
+          <img src="assets/img/icon-whatsapp.svg" alt="" aria-hidden="true" /> Связаться в WhatsApp
+        </a>
 
         <button class="nav-toggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu">
           <span></span><span></span><span></span>
@@ -81,6 +110,11 @@
 
     <!-- ============ HERO ============ -->
     <section class="hero">
+      <!-- Мистический дым (поднимается снизу) -->
+      <div class="hero__smoke" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+      </div>
+
       <!-- Арканный круг (вращается за заголовком) -->
       <div class="hero__sigil" aria-hidden="true">
         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor">
@@ -138,35 +172,38 @@
           <p class="hero__note">Первичная диагностика — бесплатно и ни&nbsp;к&nbsp;чему вас не обязывает.</p>
         </div>
 
-        <!-- Правая колонка: карточка-доказательство с хрустальным шаром -->
+        <!-- Правая колонка: портал-портрет мастера -->
         <aside class="hero__aside">
-          <div class="hero-card">
-            <div class="orb-scene" aria-hidden="true">
-              <div class="orb">
-                <span class="orb__ring orb__ring--a"></span>
-                <span class="orb__ring orb__ring--b"></span>
-                <span class="orb__ring orb__ring--c"></span>
-                <span class="orb__ball">
-                  <span class="orb__mist"></span>
-                  <span class="orb__core"></span>
-                  <span class="orb__glare"></span>
-                  <span class="orb__spark orb__spark--1"></span>
-                  <span class="orb__spark orb__spark--2"></span>
-                  <span class="orb__spark orb__spark--3"></span>
-                </span>
-                <span class="orb__shadow"></span>
+          <div class="portal reveal">
+            <div class="portal__frame">
+              <span class="portal__glow" aria-hidden="true"></span>
+              <span class="portal__ring" aria-hidden="true">
+                <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <g class="sigil-spin">
+                    <circle cx="100" cy="100" r="97" stroke-width="0.7" />
+                    <circle cx="100" cy="100" r="90" stroke-width="2" stroke-dasharray="1.4 7" />
+                    <circle cx="100" cy="4"  r="2.4" fill="currentColor" stroke="none" />
+                    <circle cx="100" cy="196" r="2.4" fill="currentColor" stroke="none" />
+                    <circle cx="4"   cy="100" r="2.4" fill="currentColor" stroke="none" />
+                    <circle cx="196" cy="100" r="2.4" fill="currentColor" stroke="none" />
+                  </g>
+                </svg>
+              </span>
+              <img class="portal__photo" src="assets/img/masters/m-miroslav.jpg"
+                   alt="Мирослав — основатель центра, мастер эзотерики и целительства" />
+            </div>
+            <div class="portal__card">
+              <span class="portal__card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 3c1.1 1.9 1.1 3.8 0 5.7-1.1-1.9-1.1-3.8 0-5.7Zm-5.4 3.7c1.9 1 3 2.6 3.2 4.9-2.3-.4-3.7-1.8-3.2-4.9Zm10.8 0c.5 3.1-.9 4.5-3.2 4.9.2-2.3 1.3-3.9 3.2-4.9ZM3.4 11.4c2.4.2 4.1 1.2 5 3.2-2.5.3-4.3-.7-5-3.2Zm17.2 0c-.7 2.5-2.5 3.5-5 3.2.9-2 2.6-3 5-3.2ZM12 12c1.6 1.2 2.7 2.9 3.1 5.1-2 .2-3.1-.9-3.1-3.2 0 2.3-1.1 3.4-3.1 3.2.4-2.2 1.5-3.9 3.1-5.1Z" />
+                </svg>
+              </span>
+              <div class="portal__card-body">
+                <p class="portal__card-name">Мирослав</p>
+                <p class="portal__card-role">Мастер эзотерики и целительства</p>
+                <p class="portal__card-meta">Более 20 лет практики и помощи людям</p>
               </div>
             </div>
-            <ul class="hero-card__facts">
-              <li><span class="hero-card__check" aria-hidden="true">&#10003;</span> Честно — без запугивания и давления</li>
-              <li><span class="hero-card__check" aria-hidden="true">&#10003;</span> Приём очно и дистанционно по всей России</li>
-              <li><span class="hero-card__check" aria-hidden="true">&#10003;</span> Полная конфиденциальность</li>
-              <li><span class="hero-card__check" aria-hidden="true">&#10003;</span> Подберём мастера под вашу ситуацию</li>
-            </ul>
-            <p class="hero-card__urgency">
-              <span class="hero-card__dot" aria-hidden="true"></span>
-              На этой неделе осталось <strong>5</strong> мест на бесплатную диагностику
-            </p>
           </div>
         </aside>
       </div>
@@ -386,35 +423,31 @@
 
         <div class="quiz__grid reveal">
           <button type="button" class="quiz-option" data-topic="Отношения, любовь и семья">
-            <span class="quiz-option__icon" aria-hidden="true">&#10084;</span>
+            <span class="quiz-option__icon" aria-hidden="true"><svg class="icon3d"><use href="#ic-heart" /></svg></span>
             <span class="quiz-option__label">Отношения и&nbsp;любовь</span>
           </button>
           <button type="button" class="quiz-option" data-topic="Здоровье и упадок сил">
-            <span class="quiz-option__icon" aria-hidden="true">&#9788;</span>
+            <span class="quiz-option__icon" aria-hidden="true"><svg class="icon3d"><use href="#ic-sun" /></svg></span>
             <span class="quiz-option__label">Здоровье и&nbsp;силы</span>
           </button>
           <button type="button" class="quiz-option" data-topic="Деньги, работа и бизнес">
-            <span class="quiz-option__icon" aria-hidden="true">&#9670;</span>
+            <span class="quiz-option__icon" aria-hidden="true"><svg class="icon3d"><use href="#ic-coins" /></svg></span>
             <span class="quiz-option__label">Деньги и&nbsp;работа</span>
           </button>
           <button type="button" class="quiz-option" data-topic="Защита дома и семьи">
-            <span class="quiz-option__icon" aria-hidden="true">&#9751;</span>
+            <span class="quiz-option__icon" aria-hidden="true"><svg class="icon3d"><use href="#ic-shield" /></svg></span>
             <span class="quiz-option__label">Защита дома</span>
           </button>
           <button type="button" class="quiz-option" data-topic="Порча, сглаз, негативное воздействие">
-            <span class="quiz-option__icon" aria-hidden="true">&#9737;</span>
+            <span class="quiz-option__icon" aria-hidden="true"><svg class="icon3d"><use href="#ic-eye" /></svg></span>
             <span class="quiz-option__label">Порча и&nbsp;сглаз</span>
           </button>
           <button type="button" class="quiz-option" data-topic="Не знаю причину — нужна диагностика">
-            <span class="quiz-option__icon" aria-hidden="true">&#10022;</span>
+            <span class="quiz-option__icon" aria-hidden="true"><svg class="icon3d"><use href="#ic-sparkle" /></svg></span>
             <span class="quiz-option__label">Не знаю причину</span>
           </button>
         </div>
 
-        <p class="quiz__urgency reveal">
-          <span class="quiz__urgency-dot" aria-hidden="true"></span>
-          На этой неделе осталось <strong>5</strong> мест на бесплатную диагностику
-        </p>
       </div>
     </section>
 
@@ -454,24 +487,24 @@
 
           <article class="master-card reveal">
             <div class="master-card__top">
-              <img class="master-card__photo" src="assets/img/masters/m-andrey.jpg" alt="Андрей Владимирович Ясный — диагностика судьбы и ауры" loading="lazy" />
+              <img class="master-card__photo" src="assets/img/masters/m-darya.jpg" alt="Дарья Миронова — таролог, любовь и отношения" loading="lazy" />
               <div class="master-card__id">
-                <h3 class="master-card__name">Андрей Владимирович Ясный</h3>
-                <span class="master-card__role">Диагностика судьбы и ауры</span>
+                <h3 class="master-card__name">Дарья Миронова</h3>
+                <span class="master-card__role">Таро · Любовь и отношения</span>
               </div>
             </div>
             <div class="master-card__rating">
-              <span class="master-card__stars" role="img" aria-label="Оценка 4,9 из 5">★★★★★</span>
-              <span class="master-card__score">4.9</span>
-              <span class="master-card__reviews">168 отзывов</span>
+              <span class="master-card__stars" role="img" aria-label="Оценка 5 из 5">★★★★★</span>
+              <span class="master-card__score">5.0</span>
+              <span class="master-card__reviews">184 отзыва</span>
             </div>
             <p class="master-card__desc">
-              Проясняет запутанные жизненные ситуации: выбор пути, отношения,
-              застой в делах. Имя — не случайность, а отражение сути работы.
+              Работает с делами сердца: возврат чувств, венец безбрачия,
+              выбор партнёра. Видит истинные причины разлада и путь к согласию.
             </p>
             <ul class="master-card__tags" aria-label="Особенности приёма">
-              <li class="master-tag">Стаж 22 года</li>
-              <li class="master-tag">Диагностика по фото</li>
+              <li class="master-tag master-tag--accent">Любовная магия</li>
+              <li class="master-tag">Расклады Таро</li>
               <li class="master-tag">Очно и онлайн</li>
             </ul>
           </article>
@@ -502,9 +535,9 @@
 
           <article class="master-card reveal">
             <div class="master-card__top">
-              <img class="master-card__photo" src="assets/img/masters/m-moisey.jpg" alt="Моисей Некропольский — экстренная энергетическая помощь" loading="lazy" />
+              <img class="master-card__photo" src="assets/img/masters/m-starec-moisey.jpg" alt="Старец Моисей — экстренная энергетическая помощь" loading="lazy" />
               <div class="master-card__id">
-                <h3 class="master-card__name">Моисей Некропольский</h3>
+                <h3 class="master-card__name">Старец Моисей</h3>
                 <span class="master-card__role">Экстренная энергетическая помощь</span>
               </div>
             </div>
@@ -521,6 +554,30 @@
               <li class="master-tag master-tag--accent">Срочные случаи</li>
               <li class="master-tag">Приём вне очереди</li>
               <li class="master-tag">Сильный канал</li>
+            </ul>
+          </article>
+
+          <article class="master-card reveal">
+            <div class="master-card__top">
+              <img class="master-card__photo" src="assets/img/masters/m-elena.jpg" alt="Елена Голунова — экстрасенс, диагностика и защита" loading="lazy" />
+              <div class="master-card__id">
+                <h3 class="master-card__name">Елена Голунова</h3>
+                <span class="master-card__role">Экстрасенс · Диагностика и защита</span>
+              </div>
+            </div>
+            <div class="master-card__rating">
+              <span class="master-card__stars" role="img" aria-label="Оценка 4,9 из 5">★★★★★</span>
+              <span class="master-card__score">4.9</span>
+              <span class="master-card__reviews">207 отзывов</span>
+            </div>
+            <p class="master-card__desc">
+              Сильный диагност: считывает родовые программы, порчу и скрытые
+              воздействия, выстраивает надёжную защиту для человека и дома.
+            </p>
+            <ul class="master-card__tags" aria-label="Особенности приёма">
+              <li class="master-tag master-tag--accent">Сильный диагност</li>
+              <li class="master-tag">Родовые программы</li>
+              <li class="master-tag">Очно и онлайн</li>
             </ul>
           </article>
         </div>
@@ -743,7 +800,7 @@
         <div class="services__grid">
           <article class="service-card reveal">
             <div class="service-card__head">
-              <span class="service-card__icon" aria-hidden="true">&#9737;</span>
+              <span class="service-card__icon" aria-hidden="true"><svg class="icon3d"><use href="#ic-gem" /></svg></span>
               <span class="service-card__num">01</span>
             </div>
             <h3 class="service-card__title">Ясновидение и расклады</h3>
@@ -752,7 +809,7 @@
 
           <article class="service-card reveal">
             <div class="service-card__head">
-              <span class="service-card__icon" aria-hidden="true">&#10022;</span>
+              <span class="service-card__icon" aria-hidden="true"><svg class="icon3d"><use href="#ic-candle" /></svg></span>
               <span class="service-card__num">02</span>
             </div>
             <h3 class="service-card__title">Снятие негативных программ</h3>
@@ -761,7 +818,7 @@
 
           <article class="service-card reveal">
             <div class="service-card__head">
-              <span class="service-card__icon" aria-hidden="true">&#9672;</span>
+              <span class="service-card__icon" aria-hidden="true"><svg class="icon3d"><use href="#ic-waves" /></svg></span>
               <span class="service-card__num">03</span>
             </div>
             <h3 class="service-card__title">Энергетическая диагностика</h3>
@@ -770,7 +827,7 @@
 
           <article class="service-card reveal">
             <div class="service-card__head">
-              <span class="service-card__icon" aria-hidden="true">&#10048;</span>
+              <span class="service-card__icon" aria-hidden="true"><svg class="icon3d"><use href="#ic-leaf" /></svg></span>
               <span class="service-card__num">04</span>
             </div>
             <h3 class="service-card__title">Травяные обереги</h3>
@@ -779,7 +836,7 @@
 
           <article class="service-card reveal">
             <div class="service-card__head">
-              <span class="service-card__icon" aria-hidden="true">&#10070;</span>
+              <span class="service-card__icon" aria-hidden="true"><svg class="icon3d"><use href="#ic-shield" /></svg></span>
               <span class="service-card__num">05</span>
             </div>
             <h3 class="service-card__title">Защита дома и семьи</h3>
@@ -788,7 +845,7 @@
 
           <article class="service-card reveal">
             <div class="service-card__head">
-              <span class="service-card__icon" aria-hidden="true">&#10036;</span>
+              <span class="service-card__icon" aria-hidden="true"><svg class="icon3d"><use href="#ic-lightning" /></svg></span>
               <span class="service-card__num">06</span>
             </div>
             <h3 class="service-card__title">Срочная помощь</h3>
@@ -1197,8 +1254,8 @@
   <!-- ============ ФУТЕР ============ -->
   <footer class="site-footer">
     <div class="container">
-      <a href="#top" class="site-footer__logo" aria-label="Центр имени Мирослава — наверх">
-        <img src="assets/img/logo.jpg" alt="Центр ясновидения и целительства имени Мирослава" />
+      <a href="#top" class="site-footer__logo" aria-label="Академия ясновидения и целительства имени Мирослава — наверх">
+        <img src="assets/img/logo-akademia.jpg" alt="Академия ясновидения и целительства имени Мирослава" />
       </a>
 
       <div class="messengers messengers--footer" aria-label="Мессенджеры для связи">
