@@ -46,6 +46,7 @@
       <symbol id="ic-lotus-line" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M24 7c3.6 4.4 5.4 8.7 5.4 12.9 0 5-2.2 9-5.4 12.1-3.2-3.1-5.4-7.1-5.4-12.1 0-4.2 1.8-8.5 5.4-12.9Z"/><path d="M11.5 15.5c4.7 1.3 8.1 3.8 10.1 7.4 1.1 2 1.8 4.4 2 7.1-4.5-.6-8-2.5-10.2-5.7-1.4-2.1-2.1-5-1.9-8.8Z"/><path d="M36.5 15.5c-4.7 1.3-8.1 3.8-10.1 7.4-1.1 2-1.8 4.4-2 7.1 4.5-.6 8-2.5 10.2-5.7 1.4-2.1 2.1-5 1.9-8.8Z"/><path d="M7.5 26c2.2 6.8 8.6 11 16.5 11s14.3-4.2 16.5-11"/></g></symbol>
       <symbol id="ic-bloom-line" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><circle cx="24" cy="24" r="4.6"/><path d="M24 5.5c2.9 3.55 2.9 7.1 0 10.65-2.9-3.55-2.9-7.1 0-10.65Z"/><path d="M24 5.5c2.9 3.55 2.9 7.1 0 10.65-2.9-3.55-2.9-7.1 0-10.65Z" transform="rotate(45 24 24)"/><path d="M24 5.5c2.9 3.55 2.9 7.1 0 10.65-2.9-3.55-2.9-7.1 0-10.65Z" transform="rotate(90 24 24)"/><path d="M24 5.5c2.9 3.55 2.9 7.1 0 10.65-2.9-3.55-2.9-7.1 0-10.65Z" transform="rotate(135 24 24)"/><path d="M24 5.5c2.9 3.55 2.9 7.1 0 10.65-2.9-3.55-2.9-7.1 0-10.65Z" transform="rotate(180 24 24)"/><path d="M24 5.5c2.9 3.55 2.9 7.1 0 10.65-2.9-3.55-2.9-7.1 0-10.65Z" transform="rotate(225 24 24)"/><path d="M24 5.5c2.9 3.55 2.9 7.1 0 10.65-2.9-3.55-2.9-7.1 0-10.65Z" transform="rotate(270 24 24)"/><path d="M24 5.5c2.9 3.55 2.9 7.1 0 10.65-2.9-3.55-2.9-7.1 0-10.65Z" transform="rotate(315 24 24)"/></g></symbol>
       <symbol id="ic-shield-line" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M24 5l15 5.2v12.4c0 8.8-6.6 15.9-15 19.4-8.4-3.5-15-10.6-15-19.4V10.2Z"/><path d="M17.2 23.6l4.6 4.8 9-9.6"/></g></symbol>
+      <symbol id="ic-person-line" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="15.5" r="7"/><path d="M9 40.5c1.7-8.3 7.6-13 15-13s13.3 4.7 15 13"/></g></symbol>
     </defs>
   </svg>
 
@@ -168,29 +169,6 @@
             региона России.
           </p>
 
-          <ul class="hero__trust" aria-label="Нам доверяют">
-            <li class="hero__trust-item">
-              <span class="hero__trust-stars" aria-hidden="true">★★★★★</span>
-              <span class="hero__trust-num">4.9</span>
-              <span class="hero__trust-label">из&nbsp;5</span>
-            </li>
-            <li class="hero__trust-item">
-              <span class="hero__trust-icon" aria-hidden="true"><svg><use href="#ic-lotus-line" /></svg></span>
-              <span class="hero__trust-num">20+</span>
-              <span class="hero__trust-label">лет практики</span>
-            </li>
-            <li class="hero__trust-item">
-              <span class="hero__trust-icon" aria-hidden="true"><svg><use href="#ic-bloom-line" /></svg></span>
-              <span class="hero__trust-num">5000+</span>
-              <span class="hero__trust-label">обращений</span>
-            </li>
-            <li class="hero__trust-item">
-              <span class="hero__trust-icon" aria-hidden="true"><svg><use href="#ic-shield-line" /></svg></span>
-              <span class="hero__trust-num">100%</span>
-              <span class="hero__trust-label">анонимно</span>
-            </li>
-          </ul>
-
           <div class="hero__actions">
             <a class="btn btn--primary btn--lg" href="#contact">Бесплатная консультация и диагностика</a>
             <a class="btn btn--ghost" href="https://wa.me/79852867618" target="_blank" rel="noopener">
@@ -237,6 +215,34 @@
             </div>
           </div>
         </aside>
+
+        <!-- Строка доверия на всю ширину героя (как в референсе) -->
+        <ul class="hero__trust" aria-label="Нам доверяют">
+          <li class="hero__trust-item">
+            <span class="hero__trust-stars" aria-hidden="true">★★★★★</span>
+            <span class="hero__trust-num">4.9</span>
+            <span class="hero__trust-label">из&nbsp;5</span>
+          </li>
+          <li class="hero__trust-item">
+            <span class="hero__trust-icon" aria-hidden="true"><svg><use href="#ic-lotus-line" /></svg></span>
+            <span class="hero__trust-num">20+</span>
+            <span class="hero__trust-label">лет практики</span>
+          </li>
+          <li class="hero__trust-item">
+            <span class="hero__trust-icon" aria-hidden="true"><svg><use href="#ic-bloom-line" /></svg></span>
+            <span class="hero__trust-num">5000+</span>
+            <span class="hero__trust-label">обращений</span>
+          </li>
+          <li class="hero__trust-item">
+            <span class="hero__trust-icon" aria-hidden="true"><svg><use href="#ic-shield-line" /></svg></span>
+            <span class="hero__trust-num">100%</span>
+            <span class="hero__trust-label">конфиденциальность и&nbsp;безопасность</span>
+          </li>
+          <li class="hero__trust-item">
+            <span class="hero__trust-icon" aria-hidden="true"><svg><use href="#ic-person-line" /></svg></span>
+            <span class="hero__trust-label hero__trust-label--wide">Индивидуальный подход к&nbsp;каждому клиенту</span>
+          </li>
+        </ul>
       </div>
     </section>
 
@@ -546,7 +552,7 @@
         <div class="about__text reveal">
           <p>
             Академия ясновидения и целительства имени Мирослава
-            работает с обращениями из десятков городов. Мы не обещаем чудес —
+            работает с обращениями из сотни городов. Мы не обещаем чудес —
             мы честно говорим о том, что видим, и сопровождаем человека на всём пути.
           </p>
           <p>
@@ -797,7 +803,7 @@
           </div>
           <div class="why-item reveal">
             <span class="why-item__check" aria-hidden="true">&#10003;</span>
-            <p class="why-item__text"><strong>Очно и дистанционно</strong> — принимаем обращения из десятков регионов России.</p>
+            <p class="why-item__text"><strong>Очно и дистанционно</strong> — принимаем обращения из сотни регионов России.</p>
           </div>
           <div class="why-item reveal">
             <span class="why-item__check" aria-hidden="true">&#10003;</span>
@@ -1409,7 +1415,7 @@
             <h3 class="knowledge-card__title">Как проходит дистанционный приём</h3>
             <p class="knowledge-card__text">
               Для работы на расстоянии мастеру достаточно вашей фотографии и имени.
-              Результат не зависит от города: мы принимаем обращения из десятков
+              Результат не зависит от города: мы принимаем обращения из сотни
               регионов России и сопровождаем вас по телефону или в мессенджере на
               всём пути.
             </p>
