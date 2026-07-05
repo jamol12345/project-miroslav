@@ -184,9 +184,27 @@
   const success = document.getElementById("form-success");
 
   if (form) {
+    /* Телефон: принимаем ТОЛЬКО российские мобильные номера.
+       Допустимые формы записи: +7 900 123-45-67, 8 (900) 123-45-67, 9001234567.
+       Иностранные коды и юзернеймы мессенджеров не проходят. */
+    function ruPhoneDigits(value) {
+      return (value || "").replace(/\D/g, "");
+    }
+    function isRuPhone(value) {
+      const raw = (value || "").trim();
+      if (!raw || !/^[+\d\s()-]+$/.test(raw)) return false;
+      if (raw.indexOf("+") > 0) return false; // «+» может быть только первым знаком
+      return /^(?:7|8)?9\d{9}$/.test(ruPhoneDigits(raw));
+    }
+    function formatRuPhone(value) {
+      const d = ruPhoneDigits(value);
+      const ten = d.length === 10 ? d : d.slice(1);
+      return "+7 (" + ten.slice(0, 3) + ") " + ten.slice(3, 6) + "-" + ten.slice(6, 8) + "-" + ten.slice(8, 10);
+    }
+
     const fields = [
       { id: "name", validate: function (v) { return v.trim().length >= 2; } },
-      { id: "contact-method", validate: function (v) { return v.trim().length >= 4; } },
+      { id: "contact-method", validate: isRuPhone },
       { id: "message", validate: function (v) { return v.trim().length >= 2; } },
     ];
 
@@ -210,6 +228,20 @@
     const submitBtn = form.querySelector('button[type="submit"]');
     const failNote = document.getElementById("form-fail");
     const contactInput = document.getElementById("contact-method");
+
+    /* Жёсткий ввод: буквы и «@» не набираются вовсе,
+       корректный номер на выходе приводится к виду +7 (9XX) XXX-XX-XX */
+    if (contactInput) {
+      contactInput.addEventListener("input", function () {
+        const cleaned = contactInput.value.replace(/[^+\d\s()-]/g, "");
+        if (cleaned !== contactInput.value) contactInput.value = cleaned;
+      });
+      contactInput.addEventListener("blur", function () {
+        if (isRuPhone(contactInput.value)) {
+          contactInput.value = formatRuPhone(contactInput.value);
+        }
+      });
+    }
     const successTitle = success ? success.querySelector(".form-success__title") : null;
     const successText = success ? success.querySelector(".form-success__text") : null;
     const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
@@ -265,6 +297,9 @@
         if (firstInvalid) firstInvalid.focus();
         return;
       }
+
+      // В письмо номер уходит в едином виде +7 (9XX) XXX-XX-XX
+      if (contactInput) contactInput.value = formatRuPhone(contactInput.value);
 
       // Анти-дубль: одна заявка с одного номера/контакта
       const key = contactKey(contactInput ? contactInput.value : "");
