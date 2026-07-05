@@ -229,17 +229,45 @@
     const failNote = document.getElementById("form-fail");
     const contactInput = document.getElementById("contact-method");
 
-    /* Жёсткий ввод: буквы и «@» не набираются вовсе,
-       корректный номер на выходе приводится к виду +7 (9XX) XXX-XX-XX */
+    /* Жёсткая маска: набрать можно ТОЛЬКО российский мобильный
+       в виде +7 (9XX) XXX-XX-XX. Маска собирает номер сама:
+       буквы не печатаются, код обязан начинаться с 9,
+       больше 10 цифр не встаёт, «+7 (» подставляется автоматически. */
     if (contactInput) {
-      contactInput.addEventListener("input", function () {
-        const cleaned = contactInput.value.replace(/[^+\d\s()-]/g, "");
-        if (cleaned !== contactInput.value) contactInput.value = cleaned;
-      });
-      contactInput.addEventListener("blur", function () {
-        if (isRuPhone(contactInput.value)) {
-          contactInput.value = formatRuPhone(contactInput.value);
+      function maskDigits(value) {
+        let d = ruPhoneDigits(value);
+        if (d.charAt(0) === "7" || d.charAt(0) === "8") d = d.slice(1); // код страны
+        const nine = d.indexOf("9");
+        d = nine === -1 ? "" : d.slice(nine); // мобильный код начинается только с 9
+        return d.slice(0, 10);
+      }
+      function renderMask(d) {
+        if (!d.length) return "";
+        let out = "+7 (" + d.slice(0, 3);
+        if (d.length > 3) out += ") " + d.slice(3, 6);
+        if (d.length > 6) out += "-" + d.slice(6, 8);
+        if (d.length > 8) out += "-" + d.slice(8, 10);
+        return out;
+      }
+      let lastDigits = maskDigits(contactInput.value);
+
+      contactInput.addEventListener("input", function (e) {
+        const raw = ruPhoneDigits(contactInput.value);
+        let d = maskDigits(contactInput.value);
+        // backspace «упёрся» в разделитель маски — стираем цифру перед ним
+        if (e && e.inputType === "deleteContentBackward" && d === lastDigits && d.length) {
+          d = d.slice(0, -1);
         }
+        lastDigits = d;
+        // человек начал с 7 или 8 — сразу показываем «+7 (», ждём код 9XX
+        contactInput.value = (!d.length && (raw === "7" || raw === "8"))
+          ? "+7 ("
+          : renderMask(d);
+        contactInput.setSelectionRange(contactInput.value.length, contactInput.value.length);
+      });
+
+      contactInput.addEventListener("blur", function () {
+        if (!lastDigits.length) contactInput.value = "";
       });
     }
     const successTitle = success ? success.querySelector(".form-success__title") : null;
