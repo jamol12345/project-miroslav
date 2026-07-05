@@ -504,12 +504,15 @@ body {
    НАШИ СПЕЦИАЛИСТЫ (видеогалерея)
    Вертикальные ролики 9:16, золочёные карточки в стиле центра.
    ============================================================ */
+/* Флекс с центрированием: неполный последний ряд встаёт по центру, без «дырок» */
 .specialists__grid {
-  display: grid;
+  display: flex; flex-wrap: wrap; justify-content: center;
   gap: var(--space-md);
-  grid-template-columns: repeat(2, 1fr);
   max-width: 620px;
   margin-inline: auto;
+}
+.specialists__grid .specialist-card {
+  flex: 0 0 calc((100% - var(--space-md)) / 2);
 }
 .specialist-card {
   position: relative;
@@ -524,21 +527,6 @@ body {
   transform: translateY(-4px);
   border-color: var(--c-gold-soft);
   box-shadow: var(--shadow-card);
-}
-/* Одинокая последняя видеокарточка — по центру ряда, в размер колонки */
-@media (max-width: 979px) {
-  .specialists__grid .specialist-card:last-child:nth-child(2n + 1) {
-    grid-column: 1 / -1;
-    justify-self: center;
-    width: calc((100% - var(--space-md)) / 2);
-  }
-}
-@media (min-width: 980px) {
-  .specialists__grid .specialist-card:last-child:nth-child(4n + 1) {
-    grid-column: 2 / span 2;
-    justify-self: center;
-    width: calc((100% - var(--space-md)) / 2);
-  }
 }
 .specialist-card__media {
   position: relative;
@@ -1088,9 +1076,9 @@ body {
   .brand__logo { height: 48px; }
   .brand-banner__logo img { height: 168px; }
   .services__grid { grid-template-columns: repeat(3, 1fr); }
-  .specialists__grid {
-    grid-template-columns: repeat(4, 1fr);
-    max-width: var(--container);
+  .specialists__grid { max-width: var(--container); }
+  .specialists__grid .specialist-card {
+    flex-basis: calc((100% - 3 * var(--space-md)) / 4);
   }
 }
 
