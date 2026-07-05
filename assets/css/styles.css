@@ -1289,10 +1289,15 @@ body {
 .faq-item__q:hover { color: var(--c-gold-deep); }
 .faq-item__q:focus-visible { outline: 2px solid var(--c-gold); outline-offset: -2px; }
 .faq-item__q::after {
-  content: "+"; position: absolute; right: 1.3rem; top: 50%; transform: translateY(-50%);
+  content: "+"; position: absolute; right: 1.3rem; top: 50%;
+  transform: translateY(-50%) rotate(0deg);
   font-size: 1.7rem; color: var(--c-gold); line-height: 1;
+  transition: transform 0.35s var(--ease), color 0.35s var(--ease);
 }
-.faq-item[open] .faq-item__q::after { content: "\2212"; }
+.faq-item[open] .faq-item__q::after {
+  transform: translateY(-50%) rotate(45deg);
+  color: var(--c-gold-deep);
+}
 .faq-item__a { padding: 0 1.4rem 1.3rem; }
 .faq-item__a p { color: var(--c-ink-soft); font-size: var(--fs-body); line-height: 1.7; }
 
@@ -1852,4 +1857,132 @@ body {
   object-fit: contain; border-radius: 22px;
   border: 1px solid rgba(228, 198, 138, 0.16);
   box-shadow: 0 34px 74px -32px rgba(0, 0, 0, 0.82), var(--glow-gold);
+}
+
+/* ============================================================
+   АТМОСФЕРА ВО ВСЕХ БЛОКАХ
+   Звёзды (data-stars), золотые пульс-кольца, дыхание кнопок
+   и логотипов, волна по фазам луны, растущие линии заголовков.
+   ============================================================ */
+
+/* Секции со звёздным полем (звёзды генерирует main.js) */
+[data-stars] { position: relative; overflow: hidden; }
+[data-stars] > .container { position: relative; z-index: 1; }
+
+/* Линии надзаголовков вырастают при появлении секции */
+.section-head.reveal .section-head__overline::before,
+.section-head.reveal .section-head__overline::after {
+  transition: width 0.9s var(--ease) 0.25s, opacity 0.9s var(--ease) 0.25s;
+}
+.section-head.reveal:not(.is-visible) .section-head__overline::before,
+.section-head.reveal:not(.is-visible) .section-head__overline::after {
+  width: 0; opacity: 0;
+}
+
+/* Общее золотое пульс-кольцо */
+@keyframes gold-ring {
+  0%        { box-shadow: 0 0 0 0 rgba(217, 180, 95, 0.42); }
+  55%, 100% { box-shadow: 0 0 0 11px rgba(217, 180, 95, 0); }
+}
+
+/* «Почему выбирают нас» — галочки пульсируют по очереди */
+.why-item__check { animation: gold-ring 3.8s var(--ease) infinite; }
+.why__grid .why-item:nth-child(2) .why-item__check { animation-delay: 0.5s; }
+.why__grid .why-item:nth-child(3) .why-item__check { animation-delay: 1s; }
+.why__grid .why-item:nth-child(4) .why-item__check { animation-delay: 1.5s; }
+.why__grid .why-item:nth-child(5) .why-item__check { animation-delay: 2s; }
+.why__grid .why-item:nth-child(6) .why-item__check { animation-delay: 2.5s; }
+
+/* Шаги приёма — золотые номера пульсируют 1 → 4 */
+@keyframes step-ring {
+  0% {
+    box-shadow: 0 8px 18px -8px rgba(217, 180, 95, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.45),
+                0 0 0 0 rgba(217, 180, 95, 0.42);
+  }
+  55%, 100% {
+    box-shadow: 0 8px 18px -8px rgba(217, 180, 95, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.45),
+                0 0 0 13px rgba(217, 180, 95, 0);
+  }
+}
+.step__num { animation: step-ring 3.6s var(--ease) infinite; }
+.steps__list .step:nth-child(2) .step__num { animation-delay: 0.45s; }
+.steps__list .step:nth-child(3) .step__num { animation-delay: 0.9s; }
+.steps__list .step:nth-child(4) .step__num { animation-delay: 1.35s; }
+
+/* Квиз — медальоны живут, как в услугах */
+.quiz__grid .quiz-option__icon { animation: icon-glow 3.6s ease-in-out infinite; }
+.quiz__grid .quiz-option:nth-child(2) .quiz-option__icon { animation-delay: 0.5s; }
+.quiz__grid .quiz-option:nth-child(3) .quiz-option__icon { animation-delay: 1s; }
+.quiz__grid .quiz-option:nth-child(4) .quiz-option__icon { animation-delay: 1.5s; }
+.quiz__grid .quiz-option:nth-child(5) .quiz-option__icon { animation-delay: 2s; }
+.quiz__grid .quiz-option:nth-child(6) .quiz-option__icon { animation-delay: 2.5s; }
+.quiz__grid .quiz-option__icon .icon3d { animation: icon-bob 4.4s var(--ease) infinite; }
+
+/* Мастера — мягкое кольцо вокруг портретов */
+@keyframes photo-ring {
+  0%        { box-shadow: var(--shadow-soft), 0 0 0 0 rgba(217, 180, 95, 0.4); }
+  55%, 100% { box-shadow: var(--shadow-soft), 0 0 0 11px rgba(217, 180, 95, 0); }
+}
+.master-card__photo { animation: photo-ring 4.4s var(--ease) infinite; }
+.masters__grid .master-card:nth-child(2) .master-card__photo { animation-delay: 0.7s; }
+.masters__grid .master-card:nth-child(3) .master-card__photo { animation-delay: 1.4s; }
+.masters__grid .master-card:nth-child(4) .master-card__photo { animation-delay: 2.1s; }
+.masters__grid .master-card:nth-child(5) .master-card__photo { animation-delay: 2.8s; }
+.masters__grid .master-card:nth-child(6) .master-card__photo { animation-delay: 3.5s; }
+
+/* «Полезно знать» — символы мерцают по очереди */
+.knowledge-card__icon { animation: gold-ring 4.2s var(--ease) infinite; }
+.knowledge__grid .knowledge-card:nth-child(2) .knowledge-card__icon { animation-delay: 0.55s; }
+.knowledge__grid .knowledge-card:nth-child(3) .knowledge-card__icon { animation-delay: 1.1s; }
+.knowledge__grid .knowledge-card:nth-child(4) .knowledge-card__icon { animation-delay: 1.65s; }
+
+/* Главные золотые кнопки дышат */
+@keyframes btn-breathe {
+  0%, 100% {
+    box-shadow: 0 12px 28px -12px rgba(217, 180, 95, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 18px 46px -10px rgba(217, 180, 95, 0.95),
+                inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  }
+}
+.hero__actions .btn--primary,
+.contact-form .btn--primary { animation: btn-breathe 3.4s ease-in-out infinite; }
+
+/* Логотипы мягко светятся */
+@keyframes logo-breathe {
+  0%, 100% { box-shadow: 0 34px 74px -32px rgba(0, 0, 0, 0.82), 0 0 34px -6px rgba(217, 180, 95, 0.45); }
+  50%      { box-shadow: 0 34px 74px -32px rgba(0, 0, 0, 0.82), 0 0 56px -4px rgba(217, 180, 95, 0.72); }
+}
+.logo-hero__img { animation: logo-breathe 5.2s ease-in-out infinite; }
+@keyframes footer-logo-breathe {
+  0%, 100% { box-shadow: 0 20px 44px -24px rgba(0, 0, 0, 0.75); }
+  50%      { box-shadow: 0 20px 44px -24px rgba(0, 0, 0, 0.75), 0 0 40px -6px rgba(217, 180, 95, 0.5); }
+}
+.site-footer__logo img { animation: footer-logo-breathe 5.2s ease-in-out infinite; }
+
+/* Волна света по фазам луны */
+@keyframes moon-wave {
+  0%, 24%, 100% { filter: brightness(1); transform: scale(1); }
+  12%           { filter: brightness(1.6) drop-shadow(0 0 7px rgba(217, 180, 95, 0.85)); transform: scale(1.22); }
+}
+.moon { animation: moon-wave 4.6s ease-in-out infinite; }
+.moon-divider .moon:nth-child(2) { animation-delay: 0.35s; }
+.moon-divider .moon:nth-child(3) { animation-delay: 0.7s; }
+.moon-divider .moon:nth-child(4) { animation-delay: 1.05s; }
+.moon-divider .moon:nth-child(5) { animation-delay: 1.4s; }
+.moon-divider .moon:nth-child(6) { animation-delay: 1.75s; }
+.moon-divider .moon:nth-child(7) { animation-delay: 2.1s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .why-item__check, .step__num,
+  .quiz-option__icon, .quiz-option__icon .icon3d,
+  .master-card__photo, .knowledge-card__icon,
+  .hero__actions .btn--primary, .contact-form .btn--primary,
+  .logo-hero__img, .site-footer__logo img, .moon { animation: none; }
+  .section-head.reveal .section-head__overline::before,
+  .section-head.reveal .section-head__overline::after { transition: none; }
 }

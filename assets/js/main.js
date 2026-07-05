@@ -56,6 +56,26 @@
     reveals.forEach(function (el) { el.classList.add("is-visible"); });
   }
 
+  /* ---------- Звёздные поля в секциях (data-stars="N") ---------- */
+  document.querySelectorAll("[data-stars]").forEach(function (section) {
+    const count = parseInt(section.getAttribute("data-stars"), 10) || 10;
+    const field = document.createElement("div");
+    field.className = "starfield";
+    field.setAttribute("aria-hidden", "true");
+    for (let i = 0; i < count; i++) {
+      const star = document.createElement("span");
+      const size = (3 + Math.random() * 3.2).toFixed(1);
+      star.style.top = (4 + Math.random() * 90).toFixed(1) + "%";
+      star.style.left = (2 + Math.random() * 95).toFixed(1) + "%";
+      star.style.width = size + "px";
+      star.style.height = size + "px";
+      star.style.animationDelay = (Math.random() * 5).toFixed(2) + "s";
+      star.style.animationDuration = (3.6 + Math.random() * 4).toFixed(2) + "s";
+      field.appendChild(star);
+    }
+    section.prepend(field);
+  });
+
   /* ---------- Видеогалерея «Наши специалисты» ---------- */
   const specialistCards = document.querySelectorAll(".specialist-card");
 
