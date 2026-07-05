@@ -338,6 +338,33 @@
     });
   }
 
+  /* ---------- 3D-наклон амулетов ленты доверия к курсору ---------- */
+  const amulets = document.querySelectorAll(".trust-badge .amulet");
+
+  if (amulets.length && !prefersReducedMotion && !coarsePointer) {
+    const AMULET_TILT = 24; // градусов до края
+
+    amulets.forEach(function (amulet) {
+      const coin = amulet.querySelector(".amulet__coin");
+      if (!coin) return;
+
+      amulet.addEventListener("mousemove", function (e) {
+        const rect = amulet.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width - 0.5;
+        const py = (e.clientY - rect.top) / rect.height - 0.5;
+        coin.classList.add("is-tilt");
+        coin.style.transform =
+          "rotateY(" + (px * AMULET_TILT * 2).toFixed(1) + "deg) " +
+          "rotateX(" + (-py * AMULET_TILT * 2).toFixed(1) + "deg) translateZ(6px)";
+      });
+
+      amulet.addEventListener("mouseleave", function () {
+        coin.classList.remove("is-tilt");
+        coin.style.transform = "";
+      });
+    });
+  }
+
   /* ---------- Анимация счётчиков (счёт от нуля при появлении) ---------- */
   const counters = document.querySelectorAll(".stat__num, .trust-badge__num");
 
