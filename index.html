@@ -1327,6 +1327,104 @@
               </div>
 
               <div class="form-field">
+                <label for="region">Регион</label>
+                <!-- Все 89 субъектов РФ, по алфавиту значимого слова названия -->
+                <select id="region" name="region" autocomplete="address-level1" required>
+                  <option value="" selected disabled>Выберите ваш регион</option>
+                  <option>Республика Адыгея</option>
+                  <option>Республика Алтай</option>
+                  <option>Алтайский край</option>
+                  <option>Амурская область</option>
+                  <option>Архангельская область</option>
+                  <option>Астраханская область</option>
+                  <option>Республика Башкортостан</option>
+                  <option>Белгородская область</option>
+                  <option>Брянская область</option>
+                  <option>Республика Бурятия</option>
+                  <option>Владимирская область</option>
+                  <option>Волгоградская область</option>
+                  <option>Вологодская область</option>
+                  <option>Воронежская область</option>
+                  <option>Республика Дагестан</option>
+                  <option>Донецкая Народная Республика</option>
+                  <option>Еврейская автономная область</option>
+                  <option>Забайкальский край</option>
+                  <option>Запорожская область</option>
+                  <option>Ивановская область</option>
+                  <option>Республика Ингушетия</option>
+                  <option>Иркутская область</option>
+                  <option>Кабардино-Балкарская Республика</option>
+                  <option>Калининградская область</option>
+                  <option>Республика Калмыкия</option>
+                  <option>Калужская область</option>
+                  <option>Камчатский край</option>
+                  <option>Карачаево-Черкесская Республика</option>
+                  <option>Республика Карелия</option>
+                  <option>Кемеровская область — Кузбасс</option>
+                  <option>Кировская область</option>
+                  <option>Республика Коми</option>
+                  <option>Костромская область</option>
+                  <option>Краснодарский край</option>
+                  <option>Красноярский край</option>
+                  <option>Республика Крым</option>
+                  <option>Курганская область</option>
+                  <option>Курская область</option>
+                  <option>Ленинградская область</option>
+                  <option>Липецкая область</option>
+                  <option>Луганская Народная Республика</option>
+                  <option>Магаданская область</option>
+                  <option>Республика Марий Эл</option>
+                  <option>Республика Мордовия</option>
+                  <option>Москва</option>
+                  <option>Московская область</option>
+                  <option>Мурманская область</option>
+                  <option>Ненецкий автономный округ</option>
+                  <option>Нижегородская область</option>
+                  <option>Новгородская область</option>
+                  <option>Новосибирская область</option>
+                  <option>Омская область</option>
+                  <option>Оренбургская область</option>
+                  <option>Орловская область</option>
+                  <option>Пензенская область</option>
+                  <option>Пермский край</option>
+                  <option>Приморский край</option>
+                  <option>Псковская область</option>
+                  <option>Ростовская область</option>
+                  <option>Рязанская область</option>
+                  <option>Самарская область</option>
+                  <option>Санкт-Петербург</option>
+                  <option>Саратовская область</option>
+                  <option>Республика Саха (Якутия)</option>
+                  <option>Сахалинская область</option>
+                  <option>Свердловская область</option>
+                  <option>Севастополь</option>
+                  <option>Республика Северная Осетия — Алания</option>
+                  <option>Смоленская область</option>
+                  <option>Ставропольский край</option>
+                  <option>Тамбовская область</option>
+                  <option>Республика Татарстан</option>
+                  <option>Тверская область</option>
+                  <option>Томская область</option>
+                  <option>Тульская область</option>
+                  <option>Республика Тыва</option>
+                  <option>Тюменская область</option>
+                  <option>Удмуртская Республика</option>
+                  <option>Ульяновская область</option>
+                  <option>Хабаровский край</option>
+                  <option>Республика Хакасия</option>
+                  <option>Ханты-Мансийский автономный округ — Югра</option>
+                  <option>Херсонская область</option>
+                  <option>Челябинская область</option>
+                  <option>Чеченская Республика</option>
+                  <option>Чувашская Республика</option>
+                  <option>Чукотский автономный округ</option>
+                  <option>Ямало-Ненецкий автономный округ</option>
+                  <option>Ярославская область</option>
+                </select>
+                <span class="form-error">Пожалуйста, выберите ваш регион.</span>
+              </div>
+
+              <div class="form-field">
                 <label for="message">Ваш вопрос</label>
                 <textarea id="message" name="message" placeholder="Коротко опишите ситуацию"></textarea>
                 <span class="form-error">Опишите вопрос хотя бы в двух словах.</span>
@@ -1340,13 +1438,6 @@
                 <a href="https://max.ru/u/f9LHodD0cOKIgTLRqzSpVTNibtBGvTWUlTS6vLV2APK6hai-obd79mZtRJ8" target="_blank" rel="noopener">MAX</a>.
               </p>
             </form>
-
-            <!-- Экран успеха -->
-            <div class="contact-form form-success" id="form-success" role="status" aria-live="polite">
-              <div class="form-success__icon" aria-hidden="true">&#10003;</div>
-              <p class="form-success__title">Заявка отправлена</p>
-              <p class="form-success__text">Мастер свяжется с вами в ближайшее время. Спасибо за доверие.</p>
-            </div>
           </div>
 
           <!-- Контактные данные -->
@@ -1456,6 +1547,20 @@
       <img src="assets/img/icon-whatsapp.svg" alt="" aria-hidden="true" />
       <span class="float-contact__label">Напишите — поможем</span>
     </a>
+  </div>
+
+  <!-- ============ МОДАЛКА «ЗАЯВКА ОТПРАВЛЕНА» ============ -->
+  <!-- Лежит в конце body, вне .reveal: transform предков ломает position:fixed -->
+  <div class="modal" id="success-modal" role="dialog" aria-modal="true"
+       aria-labelledby="success-modal-title" aria-describedby="success-modal-text" hidden>
+    <div class="modal__backdrop" data-modal-close></div>
+    <div class="modal__card" tabindex="-1">
+      <button type="button" class="modal__close" data-modal-close aria-label="Закрыть окно">&times;</button>
+      <div class="modal__icon" aria-hidden="true">&#10003;</div>
+      <h3 class="modal__title" id="success-modal-title">Заявка отправлена</h3>
+      <p class="modal__text" id="success-modal-text">Мастер свяжется с вами в ближайшее время. Спасибо за доверие.</p>
+      <button type="button" class="btn btn--primary modal__ok" data-modal-close>Хорошо</button>
+    </div>
   </div>
 
   <script src="assets/js/main.js" defer></script>

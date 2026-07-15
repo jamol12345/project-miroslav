@@ -179,9 +179,8 @@
     buildDots();
   }
 
-  /* ---------- Форма заявки (фронт-валидация + экран успеха) ---------- */
+  /* ---------- Форма заявки (фронт-валидация + модалка успеха) ---------- */
   const form = document.getElementById("lead-form");
-  const success = document.getElementById("form-success");
 
   if (form) {
     /* Телефон: принимаем ТОЛЬКО российские мобильные номера.
@@ -205,6 +204,7 @@
     const fields = [
       { id: "name", validate: function (v) { return v.trim().length >= 2; } },
       { id: "contact-method", validate: isRuPhone },
+      { id: "region", validate: function (v) { return v !== ""; } },
       { id: "message", validate: function (v) { return v.trim().length >= 2; } },
     ];
 
@@ -216,18 +216,21 @@
       return ok;
     }
 
-    // Снимать ошибку по мере ввода
+    // Снимать ошибку по мере ввода (у селекта — по выбору значения)
     fields.forEach(function (field) {
       const input = document.getElementById(field.id);
-      input.addEventListener("input", function () {
-        const wrap = input.closest(".form-field");
-        if (wrap.classList.contains("has-error")) validateField(field);
+      ["input", "change"].forEach(function (evt) {
+        input.addEventListener(evt, function () {
+          const wrap = input.closest(".form-field");
+          if (wrap.classList.contains("has-error")) validateField(field);
+        });
       });
     });
 
     const submitBtn = form.querySelector('button[type="submit"]');
     const failNote = document.getElementById("form-fail");
     const contactInput = document.getElementById("contact-method");
+    let resetPhoneMask = function () {}; // переопределяется маской ниже
 
     /* Жёсткая маска: набрать можно ТОЛЬКО российский мобильный
        в виде +7 (9XX) XXX-XX-XX. Маска собирает номер сама:
@@ -250,6 +253,7 @@
         return out;
       }
       let lastDigits = maskDigits(contactInput.value);
+      resetPhoneMask = function () { lastDigits = ""; };
 
       contactInput.addEventListener("input", function (e) {
         const raw = ruPhoneDigits(contactInput.value);
@@ -270,8 +274,6 @@
         if (!lastDigits.length) contactInput.value = "";
       });
     }
-    const successTitle = success ? success.querySelector(".form-success__title") : null;
-    const successText = success ? success.querySelector(".form-success__text") : null;
     const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
     const STORE_KEY = "miroslav_leads"; // уже отправленные контакты (анти-дубль)
 
@@ -301,14 +303,47 @@
         }
       } catch (err) { /* localStorage недоступен — просто пропускаем */ }
     }
-    function showSuccess(title, text) {
-      form.style.display = "none";
-      if (success) {
-        if (title && successTitle) successTitle.textContent = title;
-        if (text && successText) successText.textContent = text;
-        success.classList.add("is-active");
-        success.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "center" });
-      }
+    /* Модалка успеха: форма остаётся на месте и очищается, поверх страницы —
+       оповещение. Закрытие: крестик, кнопка «Хорошо», клик по подложке, Escape. */
+    const modal = document.getElementById("success-modal");
+    const modalTitle = modal ? modal.querySelector(".modal__title") : null;
+    const modalText = modal ? modal.querySelector(".modal__text") : null;
+    const modalCard = modal ? modal.querySelector(".modal__card") : null;
+    let modalReturnFocus = null;
+
+    function openSuccessModal(title, text) {
+      if (!modal) return;
+      if (modalTitle) modalTitle.textContent = title || "Заявка отправлена";
+      if (modalText) modalText.textContent = text || "Мастер свяжется с вами в ближайшее время. Спасибо за доверие.";
+      modalReturnFocus = document.activeElement;
+      modal.hidden = false;
+      document.body.classList.add("modal-open");
+      if (modalCard) modalCard.focus();
+    }
+    function closeSuccessModal() {
+      if (!modal || modal.hidden) return;
+      modal.hidden = true;
+      document.body.classList.remove("modal-open");
+      if (modalReturnFocus && typeof modalReturnFocus.focus === "function") modalReturnFocus.focus();
+      modalReturnFocus = null;
+    }
+    if (modal) {
+      modal.querySelectorAll("[data-modal-close]").forEach(function (el) {
+        el.addEventListener("click", closeSuccessModal);
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeSuccessModal();
+      });
+    }
+
+    // После успешной отправки форма очищается — можно оставить новую заявку
+    function resetForm() {
+      form.reset();
+      resetPhoneMask();
+      fields.forEach(function (field) {
+        const wrap = document.getElementById(field.id).closest(".form-field");
+        if (wrap) wrap.classList.remove("has-error");
+      });
     }
 
     form.addEventListener("submit", function (e) {
@@ -332,7 +367,7 @@
       // Анти-дубль: одна заявка с одного номера/контакта
       const key = contactKey(contactInput ? contactInput.value : "");
       if (key && loadKeys().indexOf(key) !== -1) {
-        showSuccess(
+        openSuccessModal(
           "Заявка уже принята",
           "Вы уже оставляли заявку с этими контактами — мастер свяжется с вами в ближайшее время."
         );
@@ -354,7 +389,9 @@
         .then(function (data) {
           if (!data.success) throw new Error(data.message || "Ошибка отправки");
           rememberKey(key); // запоминаем номер, чтобы не дублировать
-          showSuccess();
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = btnLabel; }
+          resetForm();
+          openSuccessModal();
         })
         .catch(function () {
           if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = btnLabel; }
