@@ -2012,6 +2012,7 @@ body.modal-open { overflow: hidden; }
 .masters__grid .master-card:nth-child(4) .master-card__photo { animation-delay: 2.1s; }
 .masters__grid .master-card:nth-child(5) .master-card__photo { animation-delay: 2.8s; }
 .masters__grid .master-card:nth-child(6) .master-card__photo { animation-delay: 3.5s; }
+.masters__grid .master-card:nth-child(7) .master-card__photo { animation-delay: 4.2s; }
 
 /* «Полезно знать» — символы мерцают по очереди */
 .knowledge-card__icon { animation: gold-ring 4.2s var(--ease) infinite; }
