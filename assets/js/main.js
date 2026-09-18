@@ -276,6 +276,20 @@
     }
     const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
     const STORE_KEY = "miroslav_leads"; // уже отправленные контакты (анти-дубль)
+    const YM_COUNTER_ID = 112571386;    // Яндекс.Метрика, цель «lead_submit»
+
+    /* Цель засчитывается только после подтверждения приёма сервером.
+       Проверка typeof и try/catch обязательны: если счётчик заблокирован
+       адблоком, голый вызов ym() бросит ReferenceError внутри .then(),
+       ошибка уйдёт в .catch() — и по успешной заявке покажется «не удалось
+       отправить». Аналитика не должна ломать отправку. */
+    function reachLeadGoal() {
+      try {
+        if (typeof window.ym === "function") {
+          window.ym(YM_COUNTER_ID, "reachGoal", "lead_submit");
+        }
+      } catch (err) { /* сбой аналитики игнорируем */ }
+    }
 
     // Нормализуем контакт в ключ: телефон → только цифры (8XXX… → 7XXX…),
     // телеграм/почта → нижний регистр без пробелов. Так «+7 900…» и «8 900…» = один номер.
@@ -388,6 +402,7 @@
         .then(function (response) { return response.json(); })
         .then(function (data) {
           if (!data.success) throw new Error(data.message || "Ошибка отправки");
+          reachLeadGoal();  // сервер подтвердил приём — засчитываем конверсию
           rememberKey(key); // запоминаем номер, чтобы не дублировать
           if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = btnLabel; }
           resetForm();

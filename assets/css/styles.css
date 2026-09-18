@@ -798,6 +798,18 @@ body {
   color: var(--c-heading); font-weight: 600; line-height: 1.2;
 }
 .problem-card__list { display: flex; flex-direction: column; gap: 0.55rem; }
+
+/* Вводный текст карточки «Внутреннее состояние» + дисклеймер под списком */
+.problem-card__intro {
+  display: flex; flex-direction: column; gap: 0.7rem;
+  color: var(--c-ink-soft); font-size: 0.97rem; line-height: 1.65;
+}
+.problem-card__legal {
+  margin-top: var(--space-md); padding-top: 0.8rem;
+  border-top: 1px solid var(--c-line-soft);
+  color: var(--c-ink-soft); font-size: 0.85rem; line-height: 1.55;
+  opacity: 0.85;
+}
 .problem-card__list li {
   position: relative; padding-left: 1.4rem;
   color: var(--c-ink-soft); font-size: 0.97rem; line-height: 1.5;
@@ -1013,6 +1025,12 @@ body {
 .form-field.has-error textarea { border-color: #c66; }
 .form-field.has-error .form-error { display: block; }
 .form-note { margin-top: var(--space-sm); font-size: 0.82rem; color: var(--c-ink-soft); }
+/* Правовая сноска под формой — тише основной подписи */
+.form-note--legal {
+  margin-top: 0.6rem; padding-top: 0.7rem;
+  border-top: 1px solid var(--c-line-soft);
+  font-size: 0.76rem; line-height: 1.55; opacity: 0.8;
+}
 
 /* honeypot против ботов — скрыт от людей, но доступен ботам */
 .form-honeypot {
@@ -1271,6 +1289,12 @@ body.modal-open { overflow: hidden; }
 .trust-badge__label {
   display: block; margin-top: 0.45rem; max-width: 16em;
   font-size: 0.95rem; color: var(--c-ink); line-height: 1.45;
+}
+/* Бейдж без золотой цифры: подпись занимает её строку и остаётся в одном ряду */
+.trust-badge__label--solo {
+  display: flex; align-items: center; margin-top: 0; max-width: 13em;
+  min-height: calc(clamp(1.9rem, 5vw, 2.5rem) * 1.1 + 0.45rem);
+  font-size: 1.05rem;
 }
 /* Четыре факта в ряд с тонкими разделителями (как в референсе) */
 @media (min-width: 820px) {
