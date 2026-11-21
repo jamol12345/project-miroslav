@@ -179,6 +179,45 @@
     buildDots();
   }
 
+  /* ---------- Возрастное предупреждение (всплывает через 4 с после захода) ----------
+     Показывается при КАЖДОЙ загрузке и обновлении страницы — так решил клиент, чтобы
+     отсечь заявки младше 35. Его же открывает форма, если выбран возраст младше 35.
+     Если в этот момент открыта другая модалка — ждём её закрытия, чтобы окна
+     не наслаивались. */
+  const ageNotice = document.getElementById("age-notice");
+  const noticeCard = ageNotice ? ageNotice.querySelector(".modal__card") : null;
+  const NOTICE_DELAY = 4000;
+  let noticeReturnFocus = null;
+
+  function openAgeNotice() {
+    if (!ageNotice || !ageNotice.hidden) return; // уже на экране
+    if (document.body.classList.contains("modal-open")) {
+      window.setTimeout(openAgeNotice, 1000);
+      return;
+    }
+    noticeReturnFocus = document.activeElement;
+    ageNotice.hidden = false;
+    document.body.classList.add("modal-open");
+    if (noticeCard) noticeCard.focus();
+  }
+  function closeAgeNotice() {
+    if (!ageNotice || ageNotice.hidden) return;
+    ageNotice.hidden = true;
+    if (!document.querySelector(".modal:not([hidden])")) document.body.classList.remove("modal-open");
+    if (noticeReturnFocus && typeof noticeReturnFocus.focus === "function") noticeReturnFocus.focus();
+    noticeReturnFocus = null;
+  }
+
+  if (ageNotice) {
+    ageNotice.querySelectorAll("[data-notice-close]").forEach(function (el) {
+      el.addEventListener("click", closeAgeNotice);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeAgeNotice();
+    });
+    window.setTimeout(openAgeNotice, NOTICE_DELAY);
+  }
+
   /* ---------- Форма заявки (фронт-валидация + модалка успеха) ---------- */
   const form = document.getElementById("lead-form");
 
@@ -203,6 +242,7 @@
 
     const fields = [
       { id: "name", validate: function (v) { return v.trim().length >= 2; } },
+      { id: "age", validate: function (v) { return v !== ""; } },
       { id: "contact-method", validate: isRuPhone },
       { id: "region", validate: function (v) { return v !== ""; } },
       { id: "message", validate: function (v) { return v.trim().length >= 2; } },
@@ -345,10 +385,43 @@
       modal.querySelectorAll("[data-modal-close]").forEach(function (el) {
         el.addEventListener("click", closeSuccessModal);
       });
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape") closeSuccessModal();
+    }
+
+    /* Предупреждение о возрасте. Заявка уходит только после «Да»;
+       «Нет», крестик, подложка и Escape закрывают окно и ничего не отправляют. */
+    const ageModal = document.getElementById("age-modal");
+    const ageCard = ageModal ? ageModal.querySelector(".modal__card") : null;
+    const ageYesBtn = document.getElementById("age-yes");
+    let ageReturnFocus = null;
+    let pendingKey = null; // контакт заявки, ожидающей подтверждения возраста
+
+    function openAgeModal() {
+      if (!ageModal) return;
+      ageReturnFocus = document.activeElement;
+      ageModal.hidden = false;
+      document.body.classList.add("modal-open");
+      if (ageCard) ageCard.focus();
+    }
+    function closeAgeModal() {
+      if (!ageModal || ageModal.hidden) return;
+      pendingKey = null; // закрыли без «Да» — заявка не уходит
+      ageModal.hidden = true;
+      // прокрутку возвращаем, только если поверх не открыта модалка успеха
+      if (!modal || modal.hidden) document.body.classList.remove("modal-open");
+      if (ageReturnFocus && typeof ageReturnFocus.focus === "function") ageReturnFocus.focus();
+      ageReturnFocus = null;
+    }
+    if (ageModal) {
+      ageModal.querySelectorAll("[data-age-cancel]").forEach(function (el) {
+        el.addEventListener("click", closeAgeModal);
       });
     }
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape") return;
+      closeAgeModal();     // Escape на предупреждении = «Нет»
+      closeSuccessModal();
+    });
 
     // После успешной отправки форма очищается — можно оставить новую заявку
     function resetForm() {
@@ -360,8 +433,56 @@
       });
     }
 
+    // Собственно отправка — вызывается только после подтверждения возраста
+    function sendLead(key) {
+      // Прячем прежнюю ошибку, блокируем кнопку
+      if (failNote) failNote.classList.remove("is-visible");
+      const btnLabel = submitBtn ? submitBtn.textContent : "";
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Отправляем…"; }
+
+      // Отправляем заявку на почту через Web3Forms
+      fetch(WEB3FORMS_ENDPOINT, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(form),
+      })
+        .then(function (response) { return response.json(); })
+        .then(function (data) {
+          if (!data.success) throw new Error(data.message || "Ошибка отправки");
+          reachLeadGoal();  // сервер подтвердил приём — засчитываем конверсию
+          rememberKey(key); // запоминаем номер, чтобы не дублировать
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = btnLabel; }
+          resetForm();
+          openSuccessModal();
+        })
+        .catch(function () {
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = btnLabel; }
+          if (failNote) failNote.classList.add("is-visible");
+        });
+    }
+
+    if (ageYesBtn) {
+      ageYesBtn.addEventListener("click", function () {
+        const key = pendingKey;
+        pendingKey = null;
+        closeAgeModal();
+        sendLead(key);
+      });
+    }
+
+    const MIN_AGE = 35;
+    const ageSelect = document.getElementById("age");
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
+
+      // Младше 35 — заявку не принимаем: показываем предупреждение и ничего не отправляем
+      const age = ageSelect ? parseInt(ageSelect.value, 10) : NaN;
+      if (age < MIN_AGE) {
+        openAgeNotice();
+        return;
+      }
+
       let valid = true;
       let firstInvalid = null;
       fields.forEach(function (field) {
@@ -388,30 +509,13 @@
         return;
       }
 
-      // Прячем прежнюю ошибку, блокируем кнопку
-      if (failNote) failNote.classList.remove("is-visible");
-      const btnLabel = submitBtn ? submitBtn.textContent : "";
-      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Отправляем…"; }
-
-      // Отправляем заявку на почту через Web3Forms
-      fetch(WEB3FORMS_ENDPOINT, {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: new FormData(form),
-      })
-        .then(function (response) { return response.json(); })
-        .then(function (data) {
-          if (!data.success) throw new Error(data.message || "Ошибка отправки");
-          reachLeadGoal();  // сервер подтвердил приём — засчитываем конверсию
-          rememberKey(key); // запоминаем номер, чтобы не дублировать
-          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = btnLabel; }
-          resetForm();
-          openSuccessModal();
-        })
-        .catch(function () {
-          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = btnLabel; }
-          if (failNote) failNote.classList.add("is-visible");
-        });
+      // Заявка готова, но уйдёт только после подтверждения возраста
+      pendingKey = key;
+      if (ageModal) {
+        openAgeModal();
+      } else {
+        sendLead(key); // модалки нет — отправляем как раньше
+      }
     });
   }
 
